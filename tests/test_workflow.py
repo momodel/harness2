@@ -121,6 +121,8 @@ class WorkflowTests(unittest.TestCase):
             "harness/scripts/summarize.py",
         ]
         self.assertEqual([name for name in required if not (reflection / name).is_file()], [])
+        stored = json.loads((work / "selection/seq2/selection.json").read_text())
+        self.assertEqual(stored["reflection_status"], "written")
         self.assertTrue((work / "context/inv2/pool/c1/rollout.md").is_file())
         self.assertEqual(list(work.rglob("reference_answer.txt")), [])
         next_context = work.parent / "ledger-2/context/inv1/library/harnesses"
@@ -184,6 +186,18 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual((stage.fell_back, stage.attempts, stage.usd), (False, 2, 3))
         self.assertIn("PREVIOUS ATTEMPT WAS REJECTED", proposer.feedback)
 
+    def test_library_write_failure_persists_reflection_error(self):
+        with patch(
+            "harness2.core.library.Library.add", side_effect=OSError("fixture write failed")
+        ):
+            result = self.run_stream(k=1)
+        self.assertEqual(result["failed"], 2)
+        for mode in ("agg", "seq"):
+            work = self.adapter.spec.runs_root / f"demo-oc-{mode}1" / "ledger-1"
+            record = json.loads((work / "selection" / f"{mode}1" / "selection.json").read_text())
+            self.assertEqual(record["reflection_status"], "error")
+            self.assertIn("library_write", record["reflection_error"])
+
     def test_no_entry_stays_out_of_library_on_resume(self):
         class NoExperience(DemoProposer):
             def call(self, mission, context_dir, label, **kwargs):
@@ -204,6 +218,10 @@ class WorkflowTests(unittest.TestCase):
         summary_path = self.adapter.spec.runs_root / "demo-oc-agg1/ledger-1/summary.json"
         selections = json.loads(summary_path.read_text())["selections"]
         self.assertEqual([selections[mode]["usd"] for mode in ("agg", "seq")], [1, 2])
+        self.assertEqual(selections["agg"]["reflection_status"], "no_entry")
+        self.assertEqual(selections["agg"]["reflection_error"], "")
+        self.assertEqual(selections["seq"]["reflection_status"], "error")
+        self.assertIn("transport", selections["seq"]["reflection_error"])
 
     def test_failed_selection_is_never_judged(self):
         class FailedSelector(DemoProposer):

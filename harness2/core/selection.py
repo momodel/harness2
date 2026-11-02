@@ -61,6 +61,9 @@ class Selection:
     error: str = ""
     usd: float = 0.0
     experience: dict = field(default_factory=dict)
+    reflection_status: str = "pending"
+    reflection_error: str = ""
+    reflection_audit: str = ""
     trivial: bool = False
     evidence: str = "deliverable"
 
@@ -451,6 +454,15 @@ def reflect_adoption(
     return experience
 
 
+def record_writeback(sel: Selection, work_dir: Path, run_dir: str, *, error: str = "") -> None:
+    """Record actual library-write success/failure separately from model distillation."""
+    sel.reflection_status = "error" if error else "written"
+    sel.reflection_error = f"library_write: {error}"[:400] if error else ""
+    _persist(sel, Path(work_dir) / "selection" / f"{sel.mode}{sel.k}", run_dir)
+    if not sel.ok:
+        raise RuntimeError(sel.error)
+
+
 def _distil(
     task_id: str,
     sel: Selection,
@@ -478,18 +490,30 @@ def _distil(
     shutil.rmtree(exp_root, ignore_errors=True)
     shutil.copytree(root, exp_root, ignore=shutil.ignore_patterns("selection.json"))
     context.assert_no_grader_verdicts(exp_root)
+    sel.reflection_status = "error"
+    sel.reflection_error = "reflection_preparation_failed"
+    sel.reflection_audit = ""
     try:
         reply = prop.call(mission, exp_root, f"experience.{sel.mode}{sel.k}")
     except ProposerError as exc:
         sel.usd += exc.cost_usd
+        sel.reflection_error = f"transport: {exc}"[:400]
         return {}
     sel.usd += reply.cost_usd
+    sel.reflection_audit = str(reply.audit) if reply.audit else ""
+    sel.reflection_error = "invalid_response: expected experience or explicit NO_ENTRY"
     edits = _EDITS.search(reply.text)
     if edits:
         (root / "edits.md").write_text(edits.group(1).strip() + "\n", encoding="utf-8")
-    m = _EXP.search(reply.text)
-    if not m:
+    remainder = _EDITS.sub("", reply.text).strip()
+    if remainder == "NO_ENTRY":
+        sel.reflection_status = "no_entry"
+        sel.reflection_error = ""
         return {}
+    matches = list(_EXP.finditer(reply.text))
+    if len(matches) != 1 or re.search(r"(?m)^NO_ENTRY\s*$", remainder):
+        return {}
+    m = matches[0]
     out: dict = {}
     for line in m.group(1).strip().splitlines():
         if ":" in line:
@@ -502,4 +526,6 @@ def _distil(
     if edits:
         out["edits"] = edits.group(1).strip()
     context.assert_tree_has_no_grader_verdicts({"EXPERIENCE.md": json.dumps(out)})
+    sel.reflection_status = "distilled"  # Library persistence is checked independently.
+    sel.reflection_error = ""
     return out

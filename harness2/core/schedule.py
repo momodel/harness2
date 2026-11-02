@@ -553,14 +553,23 @@ def _run_one_mode(
     if sel.ok and chosen is not None and not chosen.delivered:
         res.errors.append(f"{mode}: selected run {chosen.run_id} produced no deliverable")
     if mode_lib and sel.ok and library_store.has_experience(sel.experience):
-        mode_lib.add(
-            task_id,
-            chosen_tree,
-            why=sel.why,
-            label=sel.chosen_label,
-            run_id=sel.chosen_run_id,
-            experience=sel.experience,
-        )
+        try:
+            mode_lib.add(
+                task_id,
+                chosen_tree,
+                why=sel.why,
+                label=sel.chosen_label,
+                run_id=sel.chosen_run_id,
+                experience=sel.experience,
+            )
+        except Exception as exc:
+            selection.record_writeback(
+                sel, work_dir, d["chosen_run_dir"], error=str(exc) or type(exc).__name__
+            )
+            d.update(sel.to_dict())
+            raise
+        selection.record_writeback(sel, work_dir, d["chosen_run_dir"])
+        d.update(sel.to_dict())
 
 
 def run_task(
