@@ -31,9 +31,13 @@ harness2-setup = "harness2.cli.setup:main"
 harness2-check = "harness2.cli.check:main"
 harness2-demo = "harness2.cli.demo:main"
 harness2-bridge = "harness2.cli.bridge:main"
+harness2-ecom-smoke = "harness2.cli.ecom_smoke:main"
 
 [tool.setuptools.packages.find]
 include = ["harness2*"]
+
+[tool.setuptools.package-data]
+harness2 = ["benchmarks/ecom_tasks.json", "benchmarks/ecom_base/*/*.md", "benchmarks/merchantbench-requirements.txt"]
 
 [tool.ruff]
 target-version = "py312"

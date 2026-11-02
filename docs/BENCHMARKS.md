@@ -8,6 +8,21 @@ recursion mode with `--mode parallel` or `--mode sequential` and the task-level
 recursion budget with `--k`. Keep both identical across the run, judge, and
 report commands.
 
+## MerchantBench (local extension)
+
+Use **`--bench ecom`** for the independent MerchantBench adapter. It runs the
+upstream public synthetic merchant simulator and reports **final net assets**,
+not a pass-rate percentage. Start without models:
+
+```bash
+harness2-setup ecom --env-only
+harness2-ecom-smoke --days 1 --output runs/merchantbench-smoke.json
+```
+
+The current runtime is **trusted local debugging, not a container/security
+sandbox**. See [the MerchantBench guide](MERCHANTBENCH.md) for safety boundaries,
+model-backed execution, task manifests, native scoring and reproducibility.
+
 ## LAB
 
 Upstream: [harveyai/harvey-labs](https://github.com/harveyai/harvey-labs).

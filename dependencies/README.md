@@ -10,6 +10,7 @@ control. Pins are defined in `harness2/config.py`; setup commands are in the
 | [harveyai/harvey-labs](https://github.com/harveyai/harvey-labs) | MIT | Derived LAB runners and Vertex judge patch |
 | [Tencent/workbuddy-bench](https://github.com/Tencent/workbuddy-bench) | Custom Tencent license | Derived Harbor agents, harness configs, and runtime patch |
 | [anomalyco/opencode](https://github.com/anomalyco/opencode) | MIT | Runtime dependency and compatibility patch |
+| [KhanCold/merchantbench](https://github.com/KhanCold/merchantbench) | Apache 2.0 | Local ecom extension; unmodified simulator, SDK and native scoring; public synthetic data only |
 
 The WorkBuddy license includes a territorial limitation concerning use within
 the European Union. The derived runners, the patches, and the upstream license

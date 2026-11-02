@@ -162,13 +162,25 @@ def main(argv: list[str] | None = None) -> int:
     args = p.parse_args(argv)
     modes = C.parse_modes(args.modes)
 
-    config.validate_models(judge=True)
     adapter = C.make_adapter(args.bench, args.subset, args.substrate)
+    if getattr(adapter, "requires_model_judge", True):
+        config.validate_models(judge=True)
     ns = C.summary_namespace(adapter, args.k, seed=args.seed)
     ns_dir = C.runs_root_for(adapter) / ns
     identity = ns_dir / "config.json"
-    if identity.is_file() and json.loads(identity.read_text()).get("judge") != config.JUDGE_MODEL:
-        raise SystemExit("Judge model changed for this experiment; choose a new HARNESS2_RUNS_DIR")
+    expected_judge = getattr(adapter, "judge_identity", config.JUDGE_MODEL)
+    if identity.is_file():
+        recorded = json.loads(identity.read_text())
+        if recorded.get("judge") != expected_judge:
+            raise SystemExit(
+                "Judge model changed for this experiment; choose a new HARNESS2_RUNS_DIR"
+            )
+        benchmark_identity = getattr(adapter, "experiment_identity", None)
+        if (
+            callable(benchmark_identity)
+            and recorded.get("benchmark_identity") != benchmark_identity()
+        ):
+            raise SystemExit("Benchmark inputs changed; use the original configuration for judging")
     if not ns_dir.is_dir():
         raise SystemExit(
             f"nothing to judge: {ns_dir} does not exist — has the sweep `{ns}` run on this machine?"

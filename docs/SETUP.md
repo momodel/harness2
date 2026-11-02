@@ -74,7 +74,10 @@ harness2-setup lab
 harness2-check --bench lab
 ```
 
-Use `jb` for JobBench or `wb` for WorkBuddy-Bench. See the
+Use `jb` for JobBench, `wb` for WorkBuddy-Bench, or `ecom` for the local
+[MerchantBench extension](MERCHANTBENCH.md). MerchantBench's
+`harness2-setup ecom --env-only` and `harness2-ecom-smoke` need no model credentials
+or Docker; its grading is native and does not require a judge model. See the
 [benchmark guides](BENCHMARKS.md) for subset selection and licensing.
 
 The runner overlays and compatibility patches are included in
@@ -87,6 +90,7 @@ Each benchmark environment lives inside its upstream checkout:
 - `dependencies/harvey-labs/.venv`
 - `dependencies/job-bench-eval/.venv`
 - `dependencies/workbuddy-bench/.venv`
+- `dependencies/merchantbench/.venv` (local ecom extension)
 
 Harness² selects these interpreters automatically; do not activate them for the
 main commands.

@@ -140,8 +140,11 @@ def _main(args: argparse.Namespace) -> int:
 
     adapter = C.make_adapter(args.bench, args.subset, args.substrate, args.split_file)
     _stream_for(adapter, args)
+    from ..core import execution_env
     from ..preflight import require_ready
 
+    if execution_env.enabled() and (args.bench != "ecom" or args.substrate != "oc"):
+        raise config.ConfigError("Clean mode currently supports --bench ecom --substrate oc only")
     require_ready(adapter, judge=True)
 
     runs_root = C.runs_root_for(adapter)
@@ -212,7 +215,7 @@ def _check_identity(adapter, args, namespace_dir: Path) -> None:
         "method_version": config.METHOD_VERSION,
         "executor": config.SOLVER_MODEL_OC if args.substrate == "oc" else config.SOLVER_MODEL_CX,
         "improver": config.IMPROVER_MODEL,
-        "judge": config.JUDGE_MODEL,
+        "judge": getattr(adapter, "judge_identity", config.JUDGE_MODEL),
         "project": config.VERTEX_PROJECT,
         "location": config.VERTEX_REGION,
         "judge_endpoint": config.JB_JUDGE_API_BASE,
@@ -223,6 +226,9 @@ def _check_identity(adapter, args, namespace_dir: Path) -> None:
         "domains": sorted(_csv(args.only_domains)),
         "seed": args.seed,
     }
+    extra_identity = getattr(adapter, "experiment_identity", None)
+    if callable(extra_identity):
+        identity["benchmark_identity"] = extra_identity()
     namespace_dir.mkdir(parents=True, exist_ok=True)
     path = namespace_dir / "config.json"
     if path.is_file():

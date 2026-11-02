@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "tasks": [
+    {"id": "synthetic/seed42", "domain": "synthetic", "master_seed": 42},
+    {"id": "synthetic/seed43", "domain": "synthetic", "master_seed": 43},
+    {"id": "synthetic/seed44", "domain": "synthetic", "master_seed": 44},
+    {"id": "synthetic/seed45", "domain": "synthetic", "master_seed": 45},
+    {"id": "synthetic/seed46", "domain": "synthetic", "master_seed": 46}
+  ]
+}

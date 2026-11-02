@@ -148,6 +148,25 @@ def overlays(name: str, *, dry_run=False):
             )
 
 
+def merchantbench(*, dry_run=False):
+    """Fetch the unmodified public simulator and install its locked runtime separately."""
+    clone("merchantbench", dry_run=dry_run)
+    python = config.MERCHANTBENCH_PYTHON
+    if not python.is_file():
+        run(["uv", "venv", "--python", "3.12", python.parent.parent], dry_run=dry_run)
+    run(
+        [
+            "uv",
+            "pip",
+            "sync",
+            "--python",
+            python,
+            config.PKG / "benchmarks/merchantbench-requirements.txt",
+        ],
+        dry_run=dry_run,
+    )
+
+
 def workbuddy_models(*, dry_run=False):
     """Generate the two Vertex routes from the user's model IDs, never credentials."""
     solver = config.SOLVER_MODEL_OC.removeprefix("google-vertex/")

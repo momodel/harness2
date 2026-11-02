@@ -42,6 +42,8 @@ class Summary:
     fell_back: int = 0
     usd: float = 0.0
     metrics: tuple[str, ...] = ()
+    net_profit: float | None = None
+    survival: float | None = None
 
     @property
     def name(self) -> str:
@@ -51,6 +53,13 @@ class Summary:
         """LAB reports partial credit and all-criteria pass; the others report one score."""
         if not self.n:
             return f"  {self.name}: no graded task"
+        if self.metrics == ("final_net_assets",):
+            figures = f"mean final net assets {self.score:,.2f}"
+            if self.net_profit is not None:
+                figures += f" | mean net profit {self.net_profit:,.2f}"
+            if self.survival is not None:
+                figures += f" | survived {self.survival:.1f}%"
+            return f"  {self.name}: n={self.n} | {figures} | ungraded {self.n_ungraded}"
         figures = (
             f"partial {self.score:6.2f}% | pass {self.all_pass:5.1f}%"
             if bench == "lab"
@@ -92,6 +101,12 @@ def summarise(
         units = tuple(
             sorted({str(r.raw.get("metric") or "") for r in good if isinstance(r.raw, dict)} - {""})
         )
+        if "final_net_assets" in units and any(
+            not isinstance(r.raw, dict) or r.raw.get("metric") != "final_net_assets" for r in good
+        ):
+            raise ValueError(
+                "Cannot aggregate net assets with pass fractions; use separate reports"
+            )
         s = Summary(
             mode=mode,
             k=k,
@@ -105,8 +120,13 @@ def summarise(
             metrics=units,
         )
         if good:
-            s.score = round(100 * st.mean(r.frac for r in good), 2)
+            native_assets = units == ("final_net_assets",)
+            s.score = round((1 if native_assets else 100) * st.mean(r.frac for r in good), 2)
             s.all_pass = round(100 * sum(1 for r in good if r.all_pass) / len(good), 2)
+            if native_assets:
+                profits = [r.raw["net_profit"] for r in good if r.raw.get("net_profit") is not None]
+                s.net_profit = round(st.mean(profits), 2) if profits else None
+                s.survival = round(100 * st.mean(bool(r.raw.get("is_alive")) for r in good), 2)
         out.append(s)
     return out
 
@@ -120,7 +140,7 @@ def render(summaries: Sequence[Summary], *, title: str = "", bench: str = "") ->
         lines.append(s.line(bench))
 
     at1 = {s.mode: s for s in summaries if s.k == 1 and s.score is not None}
-    if len(at1) == 2:
+    if len(at1) == 2 and all(s.metrics != ("final_net_assets",) for s in at1.values()):
         gap = abs(at1["agg"].score - at1["seq"].score)
         lines += [
             "",

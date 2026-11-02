@@ -10,6 +10,7 @@ checkout at another revision.
 | workbuddy-bench | `b516950be5b56eb3be406c2f76ee1c5111dcb57f` |
 | harvey-labs | `b58a28ae9fde5ee4b810e53b4fd0a1915325a35d` |
 | opencode | `23fb5e0516c99ac04a1aa46c193efda2e1b9bb24` |
+| merchantbench | `d9e5bd7519ab100193c21778aecfb59e30f24651` |
 
 ## Included patches
 
@@ -29,7 +30,12 @@ Patches are checked before applying and skipped if already applied. Derived runn
 files belong in `harness2/third_party/{jb,lab,wb}_runner/`, which this copy does not
 include; setup copies the LAB and WorkBuddy overlays into the upstream checkouts.
 
-The upstream dependency locks are used for Python installations. OpenCode uses
+MerchantBench is not patched. Its local extension uses
+`harness2/benchmarks/merchantbench-requirements.txt` to lock the upstream
+simulator dependencies plus the public SDK's `requests` dependency. It uses no
+private dataset; see [MerchantBench](../docs/MERCHANTBENCH.md).
+
+The other upstream dependency locks are used for Python installations. OpenCode uses
 Bun 1.3.11 and the patched lock. Codex uses the version in `config.CODEX_VERSION`.
 JobBench's Hugging Face revision is resolved once for a download and recorded in
 `dataset/main/.harness2-download.json`. WorkBuddy's dataset fetcher, as patched

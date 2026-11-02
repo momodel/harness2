@@ -44,7 +44,9 @@ def check(adapter, *, judge=False) -> list[str]:
             return False
 
     for validate in (
-        lambda: config.validate_models(judge=judge),
+        lambda: config.validate_models(
+            judge=judge and getattr(adapter, "requires_model_judge", True)
+        ),
         adapter.tasks,
         OpencodeSubstrate().preflight,
         adapter.preflight,
@@ -55,7 +57,12 @@ def check(adapter, *, judge=False) -> list[str]:
             errors.append(str(exc))
 
     bench = adapter.spec.name.split("-", 1)[0]
-    name = {"jb": "job-bench-eval", "lab": "harvey-labs", "wb": "workbuddy-bench"}[bench]
+    name = {
+        "jb": "job-bench-eval",
+        "lab": "harvey-labs",
+        "wb": "workbuddy-bench",
+        "ecom": "merchantbench",
+    }[bench]
     repo = config.DEPENDENCIES / name
     for dependency in (name, "opencode"):
         target = config.DEPENDENCIES / dependency
@@ -68,17 +75,22 @@ def check(adapter, *, judge=False) -> list[str]:
                     errors.append(f"{dependency}: checkout differs from the supported pin")
             except subprocess.CalledProcessError:
                 errors.append(f"{dependency}: cannot read checkout revision")
-        patch = config.THIRD_PARTY / "patches" / PATCHES[dependency]
-        probe(
-            f"{dependency} patch",
-            ["git", "-C", target, "apply", "--reverse", "--check", patch],
-        )
+        if dependency in PATCHES:
+            patch = config.THIRD_PARTY / "patches" / PATCHES[dependency]
+            probe(
+                f"{dependency} patch",
+                ["git", "-C", target, "apply", "--reverse", "--check", patch],
+            )
     if not (config.OPENCODE_DIR / "node_modules").is_dir():
         errors.append(f"OpenCode dependencies missing; run harness2-setup {bench}")
 
     if any(
         m.startswith("google-vertex") for m in (config.SOLVER_MODEL_OC, config.IMPROVER_MODEL)
-    ) or (judge and (bench == "wb" or config.JUDGE_MODEL.startswith(("claude", "gemini")))):
+    ) or (
+        judge
+        and bench != "ecom"
+        and (bench == "wb" or config.JUDGE_MODEL.startswith(("claude", "gemini")))
+    ):
         probe(
             "Google Application Default Credentials",
             ["gcloud", "auth", "application-default", "print-access-token"],

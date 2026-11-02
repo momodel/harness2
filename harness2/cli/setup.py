@@ -25,7 +25,7 @@ from harness2 import config, install
 
 def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("benchmark", choices=("jb", "lab", "wb"))
+    p.add_argument("benchmark", choices=("jb", "lab", "wb", "ecom"))
     p.add_argument(
         "--subset",
         choices=("office", "web", "code"),
@@ -33,24 +33,44 @@ def main(argv=None):
         help="wb only: one subset to install; omitted installs office, web, and code",
     )
     p.add_argument("--substrate", choices=("oc", "cx"), default="oc")
+    p.add_argument(
+        "--env-only",
+        action="store_true",
+        help="ecom only: install the simulator without model tools",
+    )
     p.add_argument("--dry-run", action="store_true")
     args = p.parse_args(argv)
     if args.subset and args.benchmark != "wb":
         p.error("--subset only applies to wb")
+    if args.env_only and args.benchmark != "ecom":
+        p.error("--env-only only applies to ecom")
     dry = args.dry_run
-    missing = install.missing_runners()
+    missing = "" if args.env_only else install.missing_runners()
     if missing and not dry:
         p.exit(1, f"setup failed: {missing}\n")
     if missing:
         print(f"Note: {missing}")
-    name = {"jb": "job-bench-eval", "lab": "harvey-labs", "wb": "workbuddy-bench"}[args.benchmark]
+    name = {
+        "jb": "job-bench-eval",
+        "lab": "harvey-labs",
+        "wb": "workbuddy-bench",
+        "ecom": "merchantbench",
+    }[args.benchmark]
     try:
         if not dry:
-            for binary in ("git", "uv", "npm") + (
+            for binary in (("git", "uv") if args.env_only else ("git", "uv", "npm")) + (
                 ("docker", "curl") if args.benchmark == "wb" else ()
             ):
                 if not shutil.which(binary):
                     raise RuntimeError(f"Missing {binary}; see README.md")
+        if args.env_only:
+            install.merchantbench(dry_run=dry)
+            print(
+                "MerchantBench environment plan complete."
+                if dry
+                else "MerchantBench environment installed; run harness2-ecom-smoke."
+            )
+            return 0
         install.clone("opencode", dry_run=dry)
         install.patch("opencode", dry_run=dry)
         install.run(
@@ -61,6 +81,16 @@ def main(argv=None):
             cwd=config.OPENCODE_DIR,
             dry_run=dry,
         )
+        if args.benchmark == "ecom":
+            install.merchantbench(dry_run=dry)
+            if args.substrate == "cx":
+                install.codex(dry_run=dry)
+            print(
+                "Setup plan complete."
+                if dry
+                else "Installation complete. Run harness2-check --bench ecom."
+            )
+            return 0
         install.clone(name, dry_run=dry)
         install.patch(name, dry_run=dry)
         install.overlays(name, dry_run=dry)

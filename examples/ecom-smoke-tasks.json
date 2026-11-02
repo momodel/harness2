@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "tasks": [
+    {"id": "synthetic/smoke-seed42", "domain": "synthetic", "master_seed": 42, "horizon_steps": 24}
+  ]
+}

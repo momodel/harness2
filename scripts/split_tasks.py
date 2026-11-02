@@ -28,7 +28,7 @@ from harness2.benchmarks.tasks import discover
 
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--bench", required=True, choices=("jb", "lab", "wb"))
+    p.add_argument("--bench", required=True, choices=("jb", "lab", "wb", "ecom"))
     p.add_argument("--subset", choices=("office", "web", "code"))
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--train-fraction", type=float, default=0.5)

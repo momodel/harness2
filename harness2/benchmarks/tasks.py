@@ -31,6 +31,10 @@ def discover(bench: str, subset: str | None = None) -> dict[str, str]:
             p.parent.parent.relative_to(root).as_posix(): p.parent.parent.relative_to(root).parts[0]
             for p in sorted(root.glob("*/*/task_folder/TASK_INSTRUCTIONS.txt"))
         }
+    elif bench == "ecom":
+        from .ecommerce import load_tasks
+
+        return {key: task["domain"] for key, task in load_tasks().items()}
     elif bench == "lab":
         root = config.lab_repo() / "tasks"
         tasks = {
