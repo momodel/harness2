@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+<title id="title">从链路跑通，到冻结验证</title>
+<desc id="desc">这不是一条收益不断上涨的曲线，而是一条证据逐步变强的路径。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10Z" fill="context-stroke"/></marker></defs>
+<style>text{font-family:"PingFang SC","Hiragino Sans GB","Noto Sans CJK SC",sans-serif}.title{font-family:"Songti SC","Noto Serif CJK SC",serif;font-weight:700}.num{font-family:"Avenir Next","PingFang SC",sans-serif;font-weight:600}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<rect x="0" y="0" width="1920" height="1080" rx="0" fill="#F7F6F0" stroke="none"/>
+<text x="80" y="65" font-size="20" fill="#647475" font-weight="600" text-anchor="start" class="">HARNESS RSI  /  MERCHANTBENCH     •     实验证据 01</text>
+<text x="80" y="140" font-size="54" fill="#183134" font-weight="400" text-anchor="start" class="title">从链路跑通，到冻结验证</text>
+<text x="80" y="187" font-size="25" fill="#647475" font-weight="400" text-anchor="start" class="">这不是一条收益不断上涨的曲线，而是一条证据逐步变强的路径。</text>
+<path d="M80 216L1840 216" fill="none" stroke="#D8DED6" stroke-width="1.5" stroke-linejoin="round"  />
+<text x="1840" y="65" font-size="20" fill="#647475" font-weight="400" text-anchor="end" class="mono">01 / 04</text>
+<path d="M100 331L1810 331" fill="none" stroke="#D8DED6" stroke-width="4" stroke-linejoin="round"  />
+<text x="80" y="278" font-size="31" fill="#3C657F" font-weight="600" text-anchor="start" class="num">10.21</text>
+<circle cx="100" cy="331" r="19" fill="#3C657F" stroke="none" stroke-width="1"/>
+<text x="100" y="338" font-size="20" fill="#FFFFFF" font-weight="600" text-anchor="middle" class="">1</text>
+<rect x="80" y="385" width="328" height="415" rx="10" fill="#FFFFFF" stroke="#D8DED6"/>
+<rect x="80" y="385" width="328" height="7" rx="0" fill="#3C657F" stroke="none"/>
+<text x="102" y="437" font-size="27" fill="#183134" font-weight="600" text-anchor="start" class="">修复运行链路</text>
+<text x="102" y="511" font-size="43" fill="#3C657F" font-weight="400" text-anchor="start" class="num">4 / 4</text>
+<text x="102" y="549" font-size="21" fill="#647475" font-weight="400" text-anchor="start" class="">经营执行完整</text>
+<text x="102" y="605" font-size="22" fill="#183134" font-weight="400" text-anchor="start" class="">INV / DOM 曾超时回退</text>
+<text x="102" y="647" font-size="22" fill="#183134" font-weight="400" text-anchor="start" class="">排除 Snapshot 自包含</text>
+<text x="102" y="689" font-size="22" fill="#183134" font-weight="400" text-anchor="start" class="">新目录重跑并完成反思</text>
+<text x="102" y="731" font-size="22" fill="#183134" font-weight="400" text-anchor="start" class="">单任务验收通过</text>
+<rect x="80" y="825" width="328" height="55" rx="6" fill="#EAF0F4" stroke="none"/>
+<text x="244" y="860" font-size="21" fill="#3C657F" font-weight="600" text-anchor="middle" class="">链路验证 ≠ 泛化证据</text>
+<text x="438" y="278" font-size="31" fill="#A46C1A" font-weight="600" text-anchor="start" class="num">10.22–23</text>
+<circle cx="458" cy="331" r="19" fill="#A46C1A" stroke="none" stroke-width="1"/>
+<text x="458" y="338" font-size="20" fill="#FFFFFF" font-weight="600" text-anchor="middle" class="">2</text>
+<rect x="438" y="385" width="328" height="415" rx="10" fill="#FFFFFF" stroke="#D8DED6"/>
+<rect x="438" y="385" width="328" height="7" rx="0" fill="#A46C1A" stroke="none"/>
+<text x="460" y="437" font-size="27" fill="#183134" font-weight="600" text-anchor="start" class="">探索训练 A</text>
+<text x="460" y="511" font-size="43" fill="#A46C1A" font-weight="400" text-anchor="start" class="num">8 / 10</text>
+<text x="460" y="549" font-size="21" fill="#647475" font-weight="400" text-anchor="start" class="">任务有配对评分</text>
+<text x="460" y="605" font-size="22" fill="#183134" font-weight="400" text-anchor="start" class="">seed 0–9  ·  k=1</text>
+<text x="460" y="647" font-size="22" fill="#183134" font-weight="400" text-anchor="start" class="">34 / 40 次经营完成</text>
+<text x="460" y="689" font-size="22" fill="#183134" font-weight="400" text-anchor="start" class="">完整配对：7 胜 1 负</text>
+<text x="460" y="731" font-size="22" fill="#183134" font-weight="400" text-anchor="start" class="">整批验收未通过</text>
+<rect x="438" y="825" width="328" height="55" rx="6" fill="#F8EFD9" stroke="none"/>
+<text x="602" y="860" font-size="21" fill="#A46C1A" font-weight="600" text-anchor="middle" class="">保留失败与缺失</text>
+<text x="796" y="278" font-size="31" fill="#A46C1A" font-weight="600" text-anchor="start" class="num">10.23</text>
+<circle cx="816" cy="331" r="19" fill="#A46C1A" stroke="none" stroke-width="1"/>
+<text x="816" y="338" font-size="20" fill="#FFFFFF" font-weight="600" text-anchor="middle" class="">3</text>
+<rect x="796" y="385" width="328" height="415" rx="10" fill="#FFFFFF" stroke="#D8DED6"/>
+<rect x="796" y="385" width="328" height="7" rx="0" fill="#A46C1A" stroke="none"/>
+<text x="818" y="437" font-size="27" fill="#183134" font-weight="600" text-anchor="start" class="">探索训练 B</text>
+<text x="818" y="511" font-size="43" fill="#A46C1A" font-weight="400" text-anchor="start" class="num">8 + 1 + 1</text>
+<text x="818" y="549" font-size="21" fill="#647475" font-weight="400" text-anchor="start" class="">完整 / 回退 / 失败</text>
+<text x="818" y="605" font-size="22" fill="#183134" font-weight="400" text-anchor="start" class="">seed 10–19  ·  k=1</text>
+<text x="818" y="647" font-size="22" fill="#183134" font-weight="400" text-anchor="start" class="">35 / 40 次经营完成</text>
+<text x="818" y="689" font-size="22" fill="#183134" font-weight="400" text-anchor="start" class="">生成不同任务的候选</text>
+<text x="818" y="731" font-size="22" fill="#183134" font-weight="400" text-anchor="start" class="">整批验收未通过</text>
+<rect x="796" y="825" width="328" height="55" rx="6" fill="#F8EFD9" stroke="none"/>
+<text x="960" y="860" font-size="21" fill="#A46C1A" font-weight="600" text-anchor="middle" class="">不是冻结泛化评测</text>
+<text x="1154" y="278" font-size="31" fill="#087D70" font-weight="600" text-anchor="start" class="num">10.23</text>
+<circle cx="1174" cy="331" r="19" fill="#087D70" stroke="none" stroke-width="1"/>
+<text x="1174" y="338" font-size="20" fill="#FFFFFF" font-weight="600" text-anchor="middle" class="">4</text>
+<rect x="1154" y="385" width="328" height="415" rx="10" fill="#FFFFFF" stroke="#D8DED6"/>
+<rect x="1154" y="385" width="328" height="7" rx="0" fill="#087D70" stroke="none"/>
+<text x="1176" y="437" font-size="27" fill="#183134" font-weight="600" text-anchor="start" class="">筛选、冻结、试跑</text>
+<text x="1176" y="511" font-size="43" fill="#087D70" font-weight="400" text-anchor="start" class="num">seed15</text>
+<text x="1176" y="549" font-size="21" fill="#647475" font-weight="400" text-anchor="start" class="">候选 c1 被冻结</text>
+<text x="1176" y="605" font-size="22" fill="#183134" font-weight="400" text-anchor="start" class="">按工程规则筛选候选</text>
+<text x="1176" y="647" font-size="22" fill="#183134" font-weight="400" text-anchor="start" class="">不按训练利润取最大</text>
+<text x="1176" y="689" font-size="22" fill="#183134" font-weight="400" text-anchor="start" class="">先完成 1 对执行试跑</text>
+<text x="1176" y="731" font-size="22" fill="#183134" font-weight="400" text-anchor="start" class="">未按试跑利润再调策略</text>
+<rect x="1154" y="825" width="328" height="55" rx="6" fill="#E5F1E9" stroke="none"/>
+<text x="1318" y="860" font-size="21" fill="#087D70" font-weight="600" text-anchor="middle" class="">先冻结，再验证</text>
+<text x="1512" y="278" font-size="31" fill="#087D70" font-weight="600" text-anchor="start" class="num">10.26</text>
+<circle cx="1532" cy="331" r="19" fill="#087D70" stroke="none" stroke-width="1"/>
+<text x="1532" y="338" font-size="20" fill="#FFFFFF" font-weight="600" text-anchor="middle" class="">5</text>
+<rect x="1512" y="385" width="328" height="415" rx="10" fill="#FFFFFF" stroke="#D8DED6"/>
+<rect x="1512" y="385" width="328" height="7" rx="0" fill="#087D70" stroke="none"/>
+<text x="1534" y="437" font-size="27" fill="#183134" font-weight="600" text-anchor="start" class="">全量冻结验证</text>
+<text x="1534" y="511" font-size="43" fill="#087D70" font-weight="400" text-anchor="start" class="num">30 / 30</text>
+<text x="1534" y="549" font-size="21" fill="#647475" font-weight="400" text-anchor="start" class="">完整配对</text>
+<text x="1534" y="605" font-size="22" fill="#183134" font-weight="400" text-anchor="start" class="">新 seed 1000–1009</text>
+<text x="1534" y="647" font-size="22" fill="#183134" font-weight="400" text-anchor="start" class="">每 seed 重复 3 次</text>
+<text x="1534" y="689" font-size="22" fill="#183134" font-weight="400" text-anchor="start" class="">60 次执行，0 技术失败</text>
+<text x="1534" y="731" font-size="22" fill="#183134" font-weight="400" text-anchor="start" class="">快照完整性验收通过</text>
+<rect x="1512" y="825" width="328" height="55" rx="6" fill="#E5F1E9" stroke="none"/>
+<text x="1676" y="860" font-size="21" fill="#087D70" font-weight="600" text-anchor="middle" class="">支持本次短窗口效果</text>
+<text x="80" y="939" font-size="27" fill="#183134" font-weight="400" text-anchor="start" class="">阅读顺序：能完成任务  →  能生成改动  →  冻结后还能否在新 seed 上有效</text>
+<path d="M80 980L1840 980" fill="none" stroke="#D8DED6" stroke-width="1.5" stroke-linejoin="round"  />
+<text x="80" y="1015" font-size="20" fill="#647475" font-weight="400" text-anchor="start" class="">2026 年；按阶段顺序排列，横向间距不表示耗时。训练评分为事后离线核算。</text>
+<text x="80" y="1049" font-size="17" fill="#647475" font-weight="400" text-anchor="start" class="">来源：运行 job-status / verification、两批 results-summary、freeze-provenance、最终 evaluation-status；详见 evidence.json。</text>
+</svg>

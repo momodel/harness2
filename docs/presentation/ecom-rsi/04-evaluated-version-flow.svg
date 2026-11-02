@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+<title id="title">最终评估的，是哪一个版本？</title>
+<desc id="desc">把自动生成、人工工程筛选、快照冻结与独立评估分开，才能追溯最后一个数字。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10Z" fill="context-stroke"/></marker></defs>
+<style>text{font-family:"PingFang SC","Hiragino Sans GB","Noto Sans CJK SC",sans-serif}.title{font-family:"Songti SC","Noto Serif CJK SC",serif;font-weight:700}.num{font-family:"Avenir Next","PingFang SC",sans-serif;font-weight:600}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<rect x="0" y="0" width="1920" height="1080" rx="0" fill="#F7F6F0" stroke="none"/>
+<text x="80" y="65" font-size="20" fill="#647475" font-weight="600" text-anchor="start" class="">HARNESS RSI  /  MERCHANTBENCH     •     实验证据 04</text>
+<text x="80" y="140" font-size="54" fill="#183134" font-weight="400" text-anchor="start" class="title">最终评估的，是哪一个版本？</text>
+<text x="80" y="187" font-size="25" fill="#647475" font-weight="400" text-anchor="start" class="">把自动生成、人工工程筛选、快照冻结与独立评估分开，才能追溯最后一个数字。</text>
+<path d="M80 216L1840 216" fill="none" stroke="#D8DED6" stroke-width="1.5" stroke-linejoin="round"  />
+<text x="1840" y="65" font-size="20" fill="#647475" font-weight="400" text-anchor="end" class="mono">04 / 04</text>
+<rect x="80" y="244" width="675" height="49" rx="4" fill="#3C657F" stroke="none"/>
+<text x="98" y="277" font-size="24" fill="#FFFFFF" font-weight="600" text-anchor="start" class="">01  任务内自动生成</text>
+<rect x="805" y="244" width="280" height="49" rx="4" fill="#A46C1A" stroke="none"/>
+<text x="823" y="277" font-size="24" fill="#FFFFFF" font-weight="600" text-anchor="start" class="">02  人工工程筛选</text>
+<rect x="1135" y="244" width="280" height="49" rx="4" fill="#087D70" stroke="none"/>
+<text x="1153" y="277" font-size="24" fill="#FFFFFF" font-weight="600" text-anchor="start" class="">03  标准化冻结</text>
+<rect x="1465" y="244" width="375" height="49" rx="4" fill="#087D70" stroke="none"/>
+<text x="1483" y="277" font-size="24" fill="#FFFFFF" font-weight="600" text-anchor="start" class="">04  固定策略评估</text>
+<text x="80" y="338" font-size="23" fill="#647475" font-weight="400" text-anchor="start" class="">seed15 · k=1 · 模型权重不变</text>
+<rect x="80" y="440" width="180" height="110" rx="8" fill="#FFFFFF" stroke="#D8DED6"/>
+<text x="98" y="479" font-size="27" fill="#879391" font-weight="600" text-anchor="start" class="">Base</text>
+<text x="98" y="517" font-size="21" fill="#183134" font-weight="400" text-anchor="start" class="">固定起始提示</text>
+<rect x="320" y="370" width="190" height="130" rx="8" fill="#FFFFFF" stroke="#D8DED6"/>
+<text x="338" y="409" font-size="27" fill="#3C657F" font-weight="600" text-anchor="start" class="">INV</text>
+<text x="338" y="447" font-size="21" fill="#183134" font-weight="400" text-anchor="start" class="">通用流程候选</text>
+<text x="338" y="481" font-size="21" fill="#183134" font-weight="400" text-anchor="start" class="">校验与执行规则</text>
+<rect x="320" y="575" width="190" height="130" rx="8" fill="#FFFFFF" stroke="#D8DED6"/>
+<text x="338" y="614" font-size="27" fill="#3C657F" font-weight="600" text-anchor="start" class="">DOM</text>
+<text x="338" y="652" font-size="21" fill="#183134" font-weight="400" text-anchor="start" class="">领域经营候选</text>
+<text x="338" y="686" font-size="21" fill="#183134" font-weight="400" text-anchor="start" class="">预算与经营规则</text>
+<rect x="570" y="455" width="185" height="150" rx="8" fill="#E5F1E9" stroke="#D8DED6"/>
+<text x="588" y="494" font-size="27" fill="#087D70" font-weight="600" text-anchor="start" class="">合成 c1</text>
+<text x="588" y="532" font-size="21" fill="#183134" font-weight="400" text-anchor="start" class="">提示 + 经营技能</text>
+<text x="588" y="566" font-size="21" fill="#183134" font-weight="400" text-anchor="start" class="">无新增执行脚本</text>
+<path d="M260 477H290V428H312" fill="none" stroke="#3C657F" stroke-width="2" stroke-linejoin="round"  marker-end="url(#arrow)"/>
+<path d="M260 520H290V632H312" fill="none" stroke="#3C657F" stroke-width="2" stroke-linejoin="round"  marker-end="url(#arrow)"/>
+<path d="M510 428H540V490H562" fill="none" stroke="#3C657F" stroke-width="2" stroke-linejoin="round"  marker-end="url(#arrow)"/>
+<path d="M510 632H540V565H562" fill="none" stroke="#3C657F" stroke-width="2" stroke-linejoin="round"  marker-end="url(#arrow)"/>
+<text x="385" y="530" font-size="19" fill="#647475" font-weight="400" text-anchor="middle" class="">探测轨迹作为合成证据</text>
+<rect x="805" y="415" width="280" height="230" rx="8" fill="#F8EFD9" stroke="#D8DED6"/>
+<text x="823" y="454" font-size="27" fill="#A46C1A" font-weight="600" text-anchor="start" class="">选择 seed15 / c1</text>
+<text x="823" y="492" font-size="21" fill="#183134" font-weight="400" text-anchor="start" class="">按工程规则筛选</text>
+<text x="823" y="526" font-size="21" fill="#183134" font-weight="400" text-anchor="start" class="">不是利润最高版本</text>
+<text x="823" y="560" font-size="21" fill="#183134" font-weight="400" text-anchor="start" class="">seed16 训练利润更高</text>
+<text x="823" y="594" font-size="21" fill="#183134" font-weight="400" text-anchor="start" class="">不声称统计最优</text>
+<rect x="1135" y="390" width="280" height="280" rx="8" fill="#E5F1E9" stroke="#D8DED6"/>
+<text x="1153" y="429" font-size="27" fill="#087D70" font-weight="600" text-anchor="start" class="">固定候选快照</text>
+<text x="1153" y="467" font-size="21" fill="#183134" font-weight="400" text-anchor="start" class="">有效编辑内容不变</text>
+<text x="1153" y="501" font-size="21" fill="#183134" font-weight="400" text-anchor="start" class="">仅规范占位与空文件</text>
+<text x="1153" y="535" font-size="21" fill="#183134" font-weight="400" text-anchor="start" class="">不重写经营策略</text>
+<text x="1153" y="569" font-size="21" fill="#183134" font-weight="400" text-anchor="start" class="">此后不再修改候选</text>
+<text x="1153" y="645" font-size="18" fill="#647475" font-weight="400" text-anchor="start" class="mono">agg · 20d45ac8d63e55b6</text>
+<rect x="1465" y="365" width="375" height="325" rx="8" fill="#FFFFFF" stroke="#D8DED6"/>
+<text x="1483" y="404" font-size="27" fill="#087D70" font-weight="600" text-anchor="start" class="">Base vs 冻结候选</text>
+<text x="1483" y="442" font-size="21" fill="#183134" font-weight="400" text-anchor="start" class="">新 seed 1000–1009</text>
+<text x="1483" y="476" font-size="21" fill="#183134" font-weight="400" text-anchor="start" class="">每 seed 重复 3 次</text>
+<text x="1483" y="510" font-size="21" fill="#183134" font-weight="400" text-anchor="start" class="">30 对 / 60 次完整执行</text>
+<text x="1483" y="544" font-size="21" fill="#183134" font-weight="400" text-anchor="start" class="">无提案、选择、反思写回</text>
+<text x="1483" y="578" font-size="21" fill="#183134" font-weight="400" text-anchor="start" class="">每次使用新的经营状态</text>
+<path d="M755 530L797 530" fill="none" stroke="#A46C1A" stroke-width="3" stroke-linejoin="round"  marker-end="url(#arrow)"/>
+<path d="M1085 530L1127 530" fill="none" stroke="#087D70" stroke-width="3" stroke-linejoin="round"  marker-end="url(#arrow)"/>
+<path d="M1415 530L1457 530" fill="none" stroke="#087D70" stroke-width="3" stroke-linejoin="round"  marker-end="url(#arrow)"/>
+<path d="M170 550V790H1127" fill="none" stroke="#879391" stroke-width="3" stroke-linejoin="round"  marker-end="url(#arrow)"/>
+<text x="270" y="772" font-size="24" fill="#647475" font-weight="400" text-anchor="start" class="">同一个训练 Base，独立冻结为对照臂</text>
+<rect x="1135" y="735" width="280" height="112" rx="8" fill="#FFFFFF" stroke="#D8DED6"/>
+<text x="1153" y="774" font-size="27" fill="#879391" font-weight="600" text-anchor="start" class="">固定 Base 快照</text>
+<text x="1153" y="819" font-size="17" fill="#647475" font-weight="400" text-anchor="start" class="mono">base · 471dfcf713d09935</text>
+<path d="M1415 790H1652V698" fill="none" stroke="#879391" stroke-width="3" stroke-linejoin="round"  marker-end="url(#arrow)"/>
+<rect x="80" y="885" width="1760" height="65" rx="5" fill="#FFFFFF" stroke="#D8DED6"/>
+<text x="104" y="926" font-size="24" fill="#183134" font-weight="400" text-anchor="start" class="">k=1 时 c1 是唯一最终候选，无额外 selector 会话。冻结后的试跑与续跑未改变候选，也未继续训练。</text>
+<path d="M80 980L1840 980" fill="none" stroke="#D8DED6" stroke-width="1.5" stroke-linejoin="round"  />
+<text x="80" y="1015" font-size="20" fill="#647475" font-weight="400" text-anchor="start" class="">源指纹与冻结指纹因标准物化不同；已核对有效可编辑内容相同。最终评估的是一个候选，不是所有训练版本。</text>
+<text x="80" y="1049" font-size="17" fill="#647475" font-weight="400" text-anchor="start" class="">来源：seed15 summary 与实际候选、DIAGNOSIS、freeze-provenance、plan、evaluation-status；完整指纹与来源见 evidence.json。</text>
+</svg>

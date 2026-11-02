@@ -1,0 +1,624 @@
+{
+  "scope": "Public synthetic MerchantBench; fixed weights; 24h operating window + drain",
+  "report": {
+    "planned_pairs": 30,
+    "complete_pairs": 30,
+    "incomplete_pairs": 0,
+    "technical_failures": {
+      "base": 0,
+      "agg": 0
+    },
+    "not_run_cells": 0,
+    "failed_attempts": {
+      "base": 0,
+      "agg": 0
+    },
+    "technical_failure_rate": {
+      "base": 0,
+      "agg": 0
+    },
+    "arms": {
+      "base": {
+        "n": 30,
+        "mean_net_profit": 469.1499414534806,
+        "profit_stddev": 275.62193578917555,
+        "mean_fine": 193.6,
+        "fine_stddev": 113.06836503820949,
+        "survival_rate": 1,
+        "mean_fine_by_source": {
+          "bad_review": 6.166666666666667,
+          "insufficient_balance": 165.33333333333334,
+          "refund": 13.6,
+          "supplier_delisted": 7.5,
+          "timeout": 1.0
+        }
+      },
+      "agg": {
+        "n": 30,
+        "mean_net_profit": 805.775478155257,
+        "profit_stddev": 194.38170600544763,
+        "mean_fine": 149.96666666666667,
+        "fine_stddev": 95.08271656040202,
+        "survival_rate": 1,
+        "mean_fine_by_source": {
+          "bad_review": 18.5,
+          "insufficient_balance": 104.0,
+          "refund": 21.333333333333332,
+          "supplier_delisted": 4.333333333333333,
+          "timeout": 1.8
+        }
+      }
+    },
+    "paired": {
+      "net_profit": {
+        "mean_seed_delta_agg_minus_base": 336.62553670177647,
+        "seed_count": 10,
+        "seed_bootstrap_95ci": [
+          226.94919759018532,
+          449.2249119001456
+        ]
+      },
+      "cumulative_fine": {
+        "mean_seed_delta_agg_minus_base": -43.63333333333333,
+        "seed_count": 10,
+        "seed_bootstrap_95ci": [
+          -100.63333333333333,
+          19.46666666666667
+        ]
+      },
+      "is_alive": {
+        "mean_seed_delta_agg_minus_base": 0.0,
+        "seed_count": 10,
+        "seed_bootstrap_95ci": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "warning": "Conditional on complete pairs; report technical failures separately. Seeds, not repeats, are bootstrap units."
+  },
+  "arm_mean_95ci": {
+    "base": [
+      395.3622395821723,
+      538.9542196396573
+    ],
+    "agg": [
+      713.4342976759754,
+      885.684431127463
+    ]
+  },
+  "seed_means": [
+    {
+      "seed": 1000,
+      "base": 545.0648148589806,
+      "agg": 883.7925603655518,
+      "delta": 338.7277455065712
+    },
+    {
+      "seed": 1001,
+      "base": 635.7604124370921,
+      "agg": 813.6543060913472,
+      "delta": 177.89389365425507
+    },
+    {
+      "seed": 1002,
+      "base": 450.6522055073919,
+      "agg": 724.6442591415029,
+      "delta": 273.99205363411096
+    },
+    {
+      "seed": 1003,
+      "base": 223.42880854655505,
+      "agg": 902.1361920763994,
+      "delta": 678.7073835298444
+    },
+    {
+      "seed": 1004,
+      "base": 444.64311000479665,
+      "agg": 908.8523139493561,
+      "delta": 464.2092039445595
+    },
+    {
+      "seed": 1005,
+      "base": 422.9599482539743,
+      "agg": 558.6430756965759,
+      "delta": 135.68312744260163
+    },
+    {
+      "seed": 1006,
+      "base": 450.06861357376994,
+      "agg": 996.7691982685504,
+      "delta": 546.7005846947804
+    },
+    {
+      "seed": 1007,
+      "base": 645.760379264873,
+      "agg": 742.9484026063125,
+      "delta": 97.18802334143948
+    },
+    {
+      "seed": 1008,
+      "base": 411.0230080296456,
+      "agg": 603.4663512395878,
+      "delta": 192.44334320994216
+    },
+    {
+      "seed": 1009,
+      "base": 462.1381140577271,
+      "agg": 922.8481221173868,
+      "delta": 460.7100080596597
+    }
+  ],
+  "bootstrap": {
+    "unit": "seed (retain both arms and all 3 repeats)",
+    "resamples": 2000,
+    "rng_seed": 0,
+    "sorted_indices": [
+      49,
+      1949
+    ],
+    "arm_ci_origin": "New offline computation for this chart",
+    "delta_ci_origin": "Saved report, reproduced with paired_summary"
+  },
+  "wins": 25,
+  "losses": 5,
+  "positive_seed_means": 10,
+  "rounds": [
+    {
+      "order": 1,
+      "seed": 11,
+      "description": "现金容量规划；桥接输出解析与执行技能",
+      "changed_files_vs_base": [
+        "scripts/mb_run.py",
+        "skills/merchant-activation/SKILL.md",
+        "skills/merchant-capital-planning/SKILL.md",
+        "systemprompt.md"
+      ],
+      "status": "complete",
+      "delta": 406.32356716849563,
+      "summary_delta_rounded": 406.32,
+      "reflection_status": "no_entry",
+      "fallbacks": []
+    },
+    {
+      "order": 2,
+      "seed": 16,
+      "description": "经营周期技能；资金容量与交付风险检查",
+      "changed_files_vs_base": [
+        "skills/merchant-operating-cycle/SKILL.md",
+        "systemprompt.md"
+      ],
+      "status": "complete",
+      "delta": 749.0119459691321,
+      "summary_delta_rounded": 749.01,
+      "reflection_status": "written",
+      "fallbacks": []
+    },
+    {
+      "order": 3,
+      "seed": 18,
+      "description": "现金与订单核对；供应商事件先映射再下架",
+      "changed_files_vs_base": [
+        "skills/merchant-cash-and-order-control/SKILL.md",
+        "systemprompt.md"
+      ],
+      "status": "complete",
+      "delta": -5.339886607028802,
+      "summary_delta_rounded": -5.34,
+      "reflection_status": "written",
+      "fallbacks": []
+    },
+    {
+      "order": 4,
+      "seed": 13,
+      "description": "分窗口经营规则；最终仍扩大货架并亏损",
+      "changed_files_vs_base": [
+        "skills/merchant-operating-cycle/SKILL.md",
+        "systemprompt.md"
+      ],
+      "status": "complete",
+      "delta": -425.62698038769486,
+      "summary_delta_rounded": -425.62,
+      "reflection_status": "written",
+      "fallbacks": []
+    },
+    {
+      "order": 5,
+      "seed": 19,
+      "description": "经营技能 + 批次检查、历史检查脚本",
+      "changed_files_vs_base": [
+        "skills/merchant-operating-cycle/SKILL.md",
+        "skills/merchant-operating-cycle/scripts/check_batch.py",
+        "skills/merchant-operating-cycle/scripts/check_history.py",
+        "systemprompt.md"
+      ],
+      "status": "complete",
+      "delta": 551.0918919206165,
+      "summary_delta_rounded": 551.09,
+      "reflection_status": "written",
+      "fallbacks": []
+    },
+    {
+      "order": 6,
+      "seed": 15,
+      "description": "分窗口预算、储备与已成交采购均价检查",
+      "changed_files_vs_base": [
+        "skills/merchant-operating-cycle/SKILL.md",
+        "systemprompt.md"
+      ],
+      "status": "complete",
+      "delta": 673.8182960891208,
+      "summary_delta_rounded": 673.81,
+      "reflection_status": "written",
+      "fallbacks": []
+    },
+    {
+      "order": 7,
+      "seed": 12,
+      "description": "低采购成本选品；资金容量与订单核对",
+      "changed_files_vs_base": [
+        "skills/merchant-operating-cycle/SKILL.md",
+        "systemprompt.md"
+      ],
+      "status": "complete",
+      "delta": 405.172057327193,
+      "summary_delta_rounded": 405.17,
+      "reflection_status": "written",
+      "fallbacks": []
+    },
+    {
+      "order": 8,
+      "seed": 17,
+      "description": "批次构建、历史校验；区分发货与总交期",
+      "changed_files_vs_base": [
+        "skills/merchant-operating-cycle/SKILL.md",
+        "skills/merchant-operating-cycle/scripts/build_batch.py",
+        "skills/merchant-operating-cycle/scripts/check_history.py",
+        "systemprompt.md"
+      ],
+      "status": "complete",
+      "delta": 450.2129897012139,
+      "summary_delta_rounded": 450.21,
+      "reflection_status": "written",
+      "fallbacks": []
+    },
+    {
+      "order": 9,
+      "seed": 10,
+      "description": "基线经营失败；没有进入候选修改",
+      "changed_files_vs_base": [],
+      "status": "failed",
+      "delta": null,
+      "summary_delta_rounded": null,
+      "reflection_status": "unknown",
+      "fallbacks": []
+    },
+    {
+      "order": 10,
+      "seed": 14,
+      "description": "合成回退到 Base；最终没有有效新改动",
+      "changed_files_vs_base": [],
+      "status": "warning",
+      "delta": -16.907514322173938,
+      "summary_delta_rounded": -16.91,
+      "reflection_status": "no_entry",
+      "fallbacks": [
+        "c1"
+      ]
+    }
+  ],
+  "freeze": {
+    "candidate_training_seed": 15,
+    "candidate_label": "c1",
+    "source_fingerprint": "2ec54d17ed3826ee",
+    "frozen_fingerprints": {
+      "base": "471dfcf713d09935",
+      "agg": "20d45ac8d63e55b6"
+    },
+    "effective_tree_equal": true,
+    "base_matches_training_base": true,
+    "human_screening": "Engineering screening, not highest-profit selection",
+    "normalization": "Omit README stubs; materialize absent always-on files as empty"
+  },
+  "timeline": {
+    "repaired": {
+      "started": "2026-10-21T23:32:14.135725",
+      "finished": "2026-10-21T23:55:02.107375",
+      "passed": true
+    },
+    "early_training": {
+      "created": "2026-10-22T13:58:21+08:00",
+      "last_start": "2026-10-22T18:42:13+08:00",
+      "finished": "2026-10-23T00:20:59+08:00",
+      "rollouts": 34,
+      "graded_pairs": 8,
+      "verification_passed": false
+    },
+    "latest_training": {
+      "started": "2026-10-23T10:26:14+08:00",
+      "finished": "2026-10-23T16:45:05+08:00",
+      "counts": {
+        "total": 10,
+        "finished": 10,
+        "complete": 8,
+        "failed": 1,
+        "fallbacks": 1,
+        "rollouts": 35,
+        "planned_rollouts": 40
+      },
+      "verification_passed": false
+    },
+    "freeze_pilot": {
+      "prepared": "2026-10-23T17:11:21+08:00",
+      "pilot_finished": "2026-10-23T17:27:22+08:00",
+      "pilot_pairs": 1
+    },
+    "heldout": {
+      "continuation_started": "2026-10-26T07:18:20+08:00",
+      "finished": "2026-10-26T11:02:41+08:00",
+      "complete_pairs": 30,
+      "recorded_attempts": 60
+    }
+  },
+  "input_sha256": {
+    "harness2/benchmarks/ecom_analysis.py": "561935a3ef25299743fadd77bff9e6006c0ae5f545afb191c1773369047065c6",
+    "runs/ecom-heldout-seed15-20261023-170455/agg/LongTermMEMORY.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-heldout-seed15-20261023-170455/agg/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-heldout-seed15-20261023-170455/agg/skills/merchant-operating-cycle/SKILL.md": "d765860485a4902dcb088cf805b234b235241ce0196d23a3f8915981de722efd",
+    "runs/ecom-heldout-seed15-20261023-170455/agg/systemprompt.md": "82270c6ff750bd3a3aff2c26ff107b6d0f770b136254ccaf211d4730cfd0cb0f",
+    "runs/ecom-heldout-seed15-20261023-170455/agg/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-heldout-seed15-20261023-170455/base/LongTermMEMORY.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-heldout-seed15-20261023-170455/base/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-heldout-seed15-20261023-170455/base/systemprompt.md": "839276c13b0765dc1c19f0496b5d6dc8781ea036dce992ea3725b6e0bc8c3a96",
+    "runs/ecom-heldout-seed15-20261023-170455/base/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/02ce49d9acd4c276909976b4/measurement/episode.json": "0d442ed1bd6db8079e9737f80f9ee0a482e655a291cf80717970f080d3b083b1",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/073ec9b883efcded6e001c81/measurement/episode.json": "0157ec8122d04455b573a19330c795fc7ae532738ceffe55beb6822fb0af01b6",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/09edfab84753ab547c2cfd66/measurement/episode.json": "837191dd4a08aa098ed8b90c9ab5cca83cfee8e1f0dbdb51395c06349605689e",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/0b1f1593c40de3b187b9c539/measurement/episode.json": "765117217f7c08356d2db9e05492a8ce19532985e7919993bdcfc3cd5840de66",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/0bb554255ddcf50d856821a7/measurement/episode.json": "f5a4000f51ab60683e646940d87be00f19cddea5756aa59b4ed36c38e8b43678",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/0fb014f41565efc448459178/measurement/episode.json": "2e4c5f67f8a553e9bf30efb06a47d873a12b95c320e9d3e0efcb0d5646fffe24",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/0fe1196fcaf04b234136dcc3/measurement/episode.json": "67576a537c6e3240e1490cd354240445375125e4c8abd46468bb68eecf835bfa",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/11cc9a4aefda47ebe58d4a24/measurement/episode.json": "c3026e0abca2575a2da2afd6b0b16567e0c51e7d2139609f55b15bdfe25f7685",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/16542fae3e91ad5df5d8d87d/measurement/episode.json": "b49f6a52faad6ad4fc768c5a40f7d8f68a562ec48551fc6861f6e6d59214da01",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/1e2a1f702d389875df9e9383/measurement/episode.json": "5a920d01641a4d923c74264e9c06b3fe84886fa38c3ae6d47ebbcd38805d2235",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/1e9a188caf73f2c08fe25564/measurement/episode.json": "6f34915613b805fa6069cf954cd309ffff21fdc38f2c384dff03147285e18749",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/20092158741755cfca2d7cc7/measurement/episode.json": "7bc260f2fa4953f0fc24b5b345f88573ee77660891ba27cf742c01967239dfa5",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/222a58dfdd85ea2afab54ee5/measurement/episode.json": "34e22d30d0ea6ab246d1bfa7e43198eaa6a88d90a4ca927ac3c5c621f44bbfeb",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/28a7b7f61eaf453fae5c00d2/measurement/episode.json": "6ffd297b1ef80b9c9b9d62142019fa2033717611151fa72c04bc4690e8eaad31",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/2ec31150ecf09e9d6f96a8c1/measurement/episode.json": "e07bb0064afacdf47fa4840b6349a5dfa05737d41b3e41c6b55a6824fbea84ea",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/2f51cccfb8b83bdefc085761/measurement/episode.json": "7b7ec259a1283d1dcde984f3e1bfa43c1aef24a7583fb110748d8139bb41162b",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/309ef4313a5acd6944d6c460/measurement/episode.json": "59c786a1be54d9773e232a1801bbdf9917098c3dcefbd96a24eb4900506f98e1",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/3a478bd04b995e4b96589245/measurement/episode.json": "bd9e0bdff6a7d844c2d4a1b30fb291dff4edff40518df0c6cf8eecb4d2daea34",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/3c60889221ca057d1067c656/measurement/episode.json": "5508bdfdb1fb3efb0be8dc984262f9848777a73b5ddfca23bf984a5989ad459e",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/3d7ffc3ecea1f0a9ab625ed7/measurement/episode.json": "3fabebe53688c0ced54105464556cdc67af18593620a66e2247e909eacc45515",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/3f9abe704b0b2f35a183bbe4/measurement/episode.json": "eab7470861ffcea2e2269c71f6c4fd9f4a23e3a8441618eb65d817753c6ad3a4",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/41957dddee4477f736f4486a/measurement/episode.json": "9165930f868ebfad76cad9ddf6b764ef71669c8b8b6c4dcebe5ef243c0e42f02",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/438077c92118058d01d53aaa/measurement/episode.json": "e8fc3e6f48d9d71a15526761d02f46fffafb8a9efc80eae64df78ea95074809f",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/4e5e089d2248f2c82594b157/measurement/episode.json": "73576ae8cb2c5021a18032564c92f4a24dc8a9bc8615725173888f5fc0cd39f4",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/53ef8840730799c77f0226f0/measurement/episode.json": "9698857a473229e0086d822e23a9ee724dd31894f105e334d2add94a9946e1f8",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/5574c33614e21028f4dd9899/measurement/episode.json": "dbf606409d01d54b39f236c2ee36294e4ae8dabe7fa37411560f5407fd251c34",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/5e8b387461550f51cc441247/measurement/episode.json": "63d63744cf171836756d24ec47c758668b27b0516803f7fc06bacb4fdfc0e913",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/682312105dcc4b18d205cc9c/measurement/episode.json": "47215ad844e6c99ece84acfd91348514db217b04fa136fa5a25e9c7a02fa4989",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/69c888a5f177f56459f1a20d/measurement/episode.json": "c995c48adcb8244a353bf2a55138fadec288fd6f4c95fb3fa801d280de4fd5d0",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/6ad5cad601db7c0866a21ec8/measurement/episode.json": "8c97df1f91c80c2fe1f2a8a6b7d7180453ecce09bb24e2ffe7509ef947bd7f54",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/6ebc09fab6ca287f3e83a593/measurement/episode.json": "6df9e63a56e987ada394425d562b2af63277892969d52a218031314d3034bcc9",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/7107b963d79a97cec97c2706/measurement/episode.json": "c0acef5e50635e6aea207a9b78fb916c879777ada27fc7c4829efb5214844fda",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/7bd686e56205ff7e533f434e/measurement/episode.json": "68cc2f8e101901f5762aa470129a0b00d0881dd08d4797c612c64f8703e60139",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/7c21a32248baa6309d37a912/measurement/episode.json": "f52ebad6d8d1f59b3989d2e19930d5a07cca7451d09e74e80d8d3f8568e22c74",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/7cdd80a9efd29940bd6923d2/measurement/episode.json": "750da313253f8f9804f3be881b48bfeedaad231a8374c9c977536146469f066d",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/7f9ba33bf2d2207e5d9c7c39/measurement/episode.json": "5a7268d20276a1afa69a05bedde7d8687a803867804358d1b1b33400ad74af46",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/83cdb79b2fae8547ad68c499/measurement/episode.json": "37ed424c0c47a555aeb0e4c35bf80ac0229089f5ed0b67ae2b9d7960e686145d",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/897e429b340f7c9b9ed25466/measurement/episode.json": "9930158384f3e2ae1600e6db252ec992320258db11dff3e51003ee4d9b31ff82",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/91ca79e8aa492e890cf9d3ee/measurement/episode.json": "f60d4d57a6e89c4c74258f2ca80ed4dd435283b19d9f71f12c08d05c05a96500",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/94981cf31a19f307c059b4bf/measurement/episode.json": "b3892b3040c981b447ef2818ca30b51ccf67a1afb9c81e532b94fafd1a20b240",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/9938a6b2c4896a90af12a2fb/measurement/episode.json": "322454a52e3f217a2dbe20705a066c5d3ae215d3ca63ec7dd65b9de183f5ceb9",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/9ecc5eaa302990ff4652663a/measurement/episode.json": "3ba01247b51eadaff6b52c8f365de04166de7420de748fbcb6bff79885bd8f4c",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/a15c46008ce8dd68136fb09d/measurement/episode.json": "04f55360246ba92cb357a959afc87eda829de0657f33303549602780a8baaf51",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/abcdd313a1ba14036fdc6d1a/measurement/episode.json": "a9895abe6f6bd23698857c6c9dffb63a1a497fa0110ecc9ee0d8cdfd8dc5bd7d",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/afbb5b82c254fbd53281faff/measurement/episode.json": "faf8efb5e6bc21283fd998343bf378833377ae7729392fedf274de9167f3eaef",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/b102b9f93d850ed85e8c969b/measurement/episode.json": "fc85fdc892056ef3d29f9ab43b7af39006dc2259a70ddce7e89bd0a4f953d8a8",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/b978d3445795df71ac3064b7/measurement/episode.json": "0364e5b8c98fc918482ae7b11b0dd0f8be1b55d38c303152e99ad6cb23de8982",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/be60d02c1d14d8af9cffe325/measurement/episode.json": "65a4550372038c25173d5922703a6692a7e8dd923a3ab462a4a0dc2af892170b",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/bfbb12b0a5cb51aa1c3328e4/measurement/episode.json": "6988191d04d5e55193a7c47c9f8d4124216288f2c47a9518c98ed48a55706516",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/c2d5d81b0c7cca12e159c560/measurement/episode.json": "fd78776b1842ca0bd28cb038df9fd3024683c7bd228f8b57084a59da436f9318",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/cf6da7e286d610c6cd1b6b43/measurement/episode.json": "bcd64493bf826316c8c6e08b42c49a3ff7c952baf977494451ceb11eddd4557d",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/d0dad314be8ce9ccb35c27a2/measurement/episode.json": "678069629341aff63a4b14f1c4113be21df49665b7118f43594a7e00c9ea6eaf",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/d9bfadd13fce6a406e94a82d/measurement/episode.json": "e27ee1454a0e4359bc11a8a1b1ccbfb35bbe59ade1141f064b8892f59ce79337",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/da2808a40f7cd7984f46b5c8/measurement/episode.json": "2d87413ce9f1ec357cec3837db9f02a85dbcb530f39c540d0afff47f97eeb08a",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/e42c729b84af13ed0fac3cc0/measurement/episode.json": "07d3d9def03c2a372a352c4577d17697daae7f0497e45c49e884606be8daa00c",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/e83003986555450cd2b0f35f/measurement/episode.json": "c77741b00b2d4b8e4a92178dad4c696434e8729a67afbdff1a5c337fe9bbfba4",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/ee3d905d81a4453880897c25/measurement/episode.json": "32af81e9fab73de0ba4aa90699d23e015285fb4e6087747f5176a0fdf95e7b9b",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/eed105f4486db380c6547987/measurement/episode.json": "e960b77ac33bd977fcfc10b4a201a1cfb8f9f0d97f847b0d088e36ab55ff2061",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/f4d7dbeaee87a4ed118711c3/measurement/episode.json": "02b65fc9fc7da1f92afebf82f1db9579c055e850e95334a49b610f754b7980fc",
+    "runs/ecom-heldout-seed15-20261023-170455/episodes/ff8fee337a3c658ef6c29595/measurement/episode.json": "c70b9fba2c5d47ca8a29b97790a4066a0eff81811b6dc8424d5fd4131f35aa49",
+    "runs/ecom-heldout-seed15-20261023-170455/evaluation-status.json": "e6933c8267732b5f34d03bff581b18fd561a2d9ebcb93197b6f06b34006c91aa",
+    "runs/ecom-heldout-seed15-20261023-170455/freeze-provenance.json": "587cc8666623deb4302991d9cffd869bdfedafaccbc2c39dcf79f0cdadca9e37",
+    "runs/ecom-heldout-seed15-20261023-170455/pilot-status.json": "de00343a168ece1f4a9b4d325dfc221235b7de66c6edabd676ff1e63525b67d0",
+    "runs/ecom-heldout-seed15-20261023-170455/plan.json": "85dd4d7942c7394aa3fbd2aca2f0aaff95d1787159a57b9e7f3bc32e5426f5a7",
+    "runs/ecom-heldout-seed15-20261023-170455/report.json": "dc24f4bc62da519649d69d3003cdb1fc021c5bc37546ecce0b82ca03b272fd93",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1000-r0-agg.json": "a8da9747cb0b3d4bc6795feb1fea5e2ef47ad9521b196acab1f3b763e031becb",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1000-r0-base.json": "e10140c1a82359c930d522aabe136310972328df37d0a7b3dfecd6ae2824d572",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1000-r1-agg.json": "3a8e465e10bf0113202eab33eb05a4d5f4f59dca119366d79ae6a945d0bdf06b",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1000-r1-base.json": "79dc5280020c3b9326e919dbd44e52938da2e452af205cd64cbdd7f5b567d05f",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1000-r2-agg.json": "96325035fdc9fad710d68bd172144113d5339d7019410a5e76d4c77f9423ee03",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1000-r2-base.json": "1c6dd3ff63877de8ea1bb1b4b4126d82298af1fc6256bb78217dc258fe45f6ec",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1001-r0-agg.json": "d8677e0a2e52158f012e8ede249ed18f368cc2c34a735cf70243203d5da842a2",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1001-r0-base.json": "0bca705a04f5397844cb150cdc9224fcf17830c1da14083e74aa065620b61df9",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1001-r1-agg.json": "1b680d23cba637579378fc4ace8e7ed10b197763d0249dc099fe0cd392aabbf6",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1001-r1-base.json": "34ce372d3d42450f233283807e4433ec4b6083415f73c6785cf0a94305312b1b",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1001-r2-agg.json": "bb4fcd7ff0ed8de693f34617fb5f20b5cafdcec03524f3e0d9cd088a174b5ce8",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1001-r2-base.json": "9eaf4600594198595650e2ddee7365a82fbca6be76dbf9bd22b71b154483ebb0",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1002-r0-agg.json": "c3ddd03c1cb0724a22aaae508d94a6a702acb04b2325d7c7f41e8ceb14425ad2",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1002-r0-base.json": "5bea2c3cbc1270ede99d0220f12ddff758201f61d2a1649c83d82c709784cff1",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1002-r1-agg.json": "bcf0ef15f8b4dce0d0aeb516c12f260246e93d146a7db957c7ac4f81a87c7307",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1002-r1-base.json": "a296265bf7272d38c3a9b1d3f9c3bbdfc8ff7d0a330e7cd12fdb52180183d830",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1002-r2-agg.json": "65e6187cb207c4fce4fbc96eba6d10de535088b5ad95f7dc41934dae649248b9",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1002-r2-base.json": "c0821fc434ccb7436aa1803d5111ad31970e13006ac1facc70c39e1f1c7ac1ee",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1003-r0-agg.json": "b8ac6c08a306ed888699c5ea276e92ea28fc5e5ffc60c38006aef6add1f633ef",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1003-r0-base.json": "a2aff712b5ce152fb47296c4bda8f222a1c48bb8b448aa3654b5976699c4e221",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1003-r1-agg.json": "d463d023b95662858d4ec8eabdd7594713995849aacc89612a656d559fc547cc",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1003-r1-base.json": "904a86bbc23ae76db8bbbe982d604e5271b16df72cec33c086465ea04b45079f",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1003-r2-agg.json": "ebd782bcc0dcc0b4f617774b1a3890dff2b215751b35696225c25f93bac79276",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1003-r2-base.json": "38ae3213e3682e20f115e7877b222fa93c08a710265d14012b49f1e0b8ba37e0",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1004-r0-agg.json": "dce9a968d63c9def600daabd34ebd208338ec2492177acf83e875f6e6b688470",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1004-r0-base.json": "b1b5b832485743c4d138668ef29e995de91d8d4da93effca2c1e710faeed39ad",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1004-r1-agg.json": "09a183935b610f7f085116ab4fa755d9a05a5c32d2c43dadd01f3228fc08bc22",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1004-r1-base.json": "b47a8c78e9980b7cc7710758975c7b66b7fdd5ae04584a27edcbc60a84985df4",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1004-r2-agg.json": "02530906ef9a01f8584f7b07e5bd6dcdf2aafb1d0972483839dcc93b515083d8",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1004-r2-base.json": "527a0718aaaee54e3f1998706e2dd863d4eb851a4e794ee2e1fabe4c117b763c",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1005-r0-agg.json": "68077f0dd70cef5b7f4dd8296ba8f1191cdf8346e516817fdc3dfdf82dce157f",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1005-r0-base.json": "1a117435e148636495bf574c76d16216ebeda4c5f0acd00d9409942523ed483a",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1005-r1-agg.json": "c39224a3197827f580142649084684f74e112c7e9d34030488eca1c6de18b21f",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1005-r1-base.json": "f4206dcf58b0b5df9e76149ee434dd62aac7cd9f2358068f47db09bb898ce3fa",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1005-r2-agg.json": "1cbd65a80ac8e5b37244759e120610b86ea7a5da171737b3223baaad9eff8936",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1005-r2-base.json": "05b2907852be6100ff101ddf406d57d45122e28537847f53368def09ef05a61b",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1006-r0-agg.json": "0b63f1bc87c2c9d2edbe4cfdb713d29aba00e846079275ab3ea02849d0f4e1b8",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1006-r0-base.json": "7e40f63b5cfbfeb7af668f53e58f82b6f9302ecc1a6a9be33e40d7497395c914",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1006-r1-agg.json": "f42981d38346fb55d93e34d094248eb403911acdfaf60b6528d067092bb41790",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1006-r1-base.json": "67d5fb0047762f959f2fbf98e3b2fc051f8fdbe6a664db894e2c7ca08a4a2e7c",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1006-r2-agg.json": "2be9bc8644cb96cc3cf7c4b467a4477f77d854e11d2eafe8ed9e919ac29e2228",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1006-r2-base.json": "0f6f84a953eea3e15b58d11bbafe84c610c65691cf81744dd1908b937908bc06",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1007-r0-agg.json": "1c64afb9b9b894f9ef2ed8c5027e4fe836d8a944841ea5b8d28a1017342c44a0",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1007-r0-base.json": "f987b5ac6ee6231757418f9f3c0c1d89f7ff7673e3893d89dd8fa3cce8c8b8f5",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1007-r1-agg.json": "40ac6297c2f0c4143980dbb12a06e7eae2ec49b7ba3c8c064d62a4dad50f7388",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1007-r1-base.json": "aec281e8877fb04149e665899bf8770553fe22b8a73671a54e2129bb371b4cf8",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1007-r2-agg.json": "dc84cdcdb6c8cb1cd8a9f96793d5cd5ecce5bffc7b61db6dc40494dde552c639",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1007-r2-base.json": "1a6e6d8b348cd0f91964f9c7d9105bd46937245dd187b94e90210715b6bc30e8",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1008-r0-agg.json": "16c22184124243f3b9092ad5d1a8c760afa3353b5f12b6a72d14338398b4160e",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1008-r0-base.json": "3a2e3f2db93f2b23783cc46265a94c65d1267f64a1b325b1af904b30faa481e0",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1008-r1-agg.json": "a30094fc3ee6c63c268c84a1b78115c3361371ec542d7d0ac7c0830b5837198a",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1008-r1-base.json": "65dc733522eecfa009f3ed890a4940939bbab61a1df922c8a9a22b1c80072012",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1008-r2-agg.json": "b0f30e1c47ba9212a749769c3307f0676e05907b5fc87346db6f944075b3b690",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1008-r2-base.json": "17a9f8d6fd509f255bd1d37dfe15f6c1e188e4110b6759953825a9a164854b28",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1009-r0-agg.json": "83e17e969444a5f1efd53c12695faae031e772167bcbf3e366b344cd5eca3e37",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1009-r0-base.json": "084806ab0802ef3eb4a8adef03e9ac35dd839e363c1e06278d348267ccbba400",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1009-r1-agg.json": "b2d3f27bb5979fed98d07e200710d9cbf5f3c5b6ad447f222d4b2d14a5038cc6",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1009-r1-base.json": "85d79ebeff423bbf72b617b737590cb81d47de5e4ad8fde396144ac75a2c07f0",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1009-r2-agg.json": "4fb3451a98722a7f4686f9d853f0727754a7cd03b332a5d43a7f2a6ac903110a",
+    "runs/ecom-heldout-seed15-20261023-170455/results/seed1009-r2-base.json": "b61ae29c4f470780f7884e60eb1816136b830ddd4b6abb1fb13d6431c94f1346",
+    "runs/ecom-holdout-preflight-20261023-170455/DIAGNOSIS.md": "dc9b7c094b70b0f9b6ecf65cdc523a46de2ba39e2ba3cd641bbde51aeee3aa9e",
+    "runs/ecom-rsi-20261021-172043/diagnostics/ROOT_CAUSE.md": "d0d27d083fc03c72128881137887459164bc8f1c65984932f7de7974efd4241d",
+    "runs/ecom-rsi-snapshot-fixed-20261021-233057/job-status.json": "abb256d9e42223cd3bba55e0e666516a5b766dcc146b090187c6cdaf8e1b382c",
+    "runs/ecom-rsi-snapshot-fixed-20261021-233057/verification.json": "d6cdd484340d3a973d498f1e5a52d77382ea0aff02e032dc30838378b95053e8",
+    "runs/ecom-train-20261022-135821-2bc054/job-status.json": "560fa33acd46ae78ef3f44adb89571a06433f9f337359754e0a30c97fcd6d08c",
+    "runs/ecom-train-20261022-135821-2bc054/results-summary.json": "77c80ae03d3ccd5b0d4ce7bd925561d44102b01ce7a624f6774c77a9bab86373",
+    "runs/ecom-train-20261022-135821-2bc054/train.json": "01018b2851bee2ad8b10bf61c2349d2b9b8a037f41bce3c69190b473db85ce8f",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-agg1-s10/synthetic__train24h-seed10/summary.json": "fb0cc59acb21c9c0808e7415dc4a52329ea0b43b454a4aada4c50ad0c606e71c",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-agg1-s10/synthetic__train24h-seed11/summary.json": "b7b9d848add0ece3d2e118ddd38197e0e538f0476c93962696158b8faa7f7f9b",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-agg1-s10/synthetic__train24h-seed12/summary.json": "89d4289d801ab6450491e778abe52495d9d95ec4397c0148081db864efbee711",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-agg1-s10/synthetic__train24h-seed13/summary.json": "792edeeb0cb94000daf1c93bf38f37706bf76003fe142474d740478485d36aaf",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-agg1-s10/synthetic__train24h-seed14/summary.json": "2f03601653dda3570edbf3c04ba4c1911466052dd04241bb6c74d885dc3966e7",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-agg1-s10/synthetic__train24h-seed15/summary.json": "8e11fe9f5547ba245e33b8ee634af489f0de4e29aaf72d76c72e42cb5b12b88d",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-agg1-s10/synthetic__train24h-seed16/summary.json": "8b619991052e28cd698e7fd2e977bed3a1c2def30d5dec2a7268f3a6100640b5",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-agg1-s10/synthetic__train24h-seed17/summary.json": "abbba3a6422d43f8bc1807653666a42e92e6d64b11aeba819fea18e483003320",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-agg1-s10/synthetic__train24h-seed18/summary.json": "cf10ceff3e438f15918a5400e56e447b07bf1901ba1d8aa7645b5271e01bc03e",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-agg1-s10/synthetic__train24h-seed19/summary.json": "fa67bcdb1e4f44f0a957fab983d7ada2b0e1149539d49a98de060b60f78c81a2",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed11/harnesses/base/LongTermMEMORY.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed11/harnesses/base/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed11/harnesses/base/systemprompt.md": "839276c13b0765dc1c19f0496b5d6dc8781ea036dce992ea3725b6e0bc8c3a96",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed11/harnesses/base/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed11/harnesses/c1/LongTermMEMORY.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed11/harnesses/c1/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed11/harnesses/c1/scripts/mb_run.py": "e9dcc44638cf5d3e51fd005895c03000748fae7a268495aca2b86d9475f9a120",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed11/harnesses/c1/skills/merchant-activation/SKILL.md": "2352a4b19cb544eca71d609bd05536691abdf8c7b7922ddd5f89cd6c68f18c48",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed11/harnesses/c1/skills/merchant-capital-planning/SKILL.md": "d5696c49fd286c7038c01bb5a459906ba9dd64d178c8ca33628e03632e7dea45",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed11/harnesses/c1/systemprompt.md": "d5ecde0df2cbe0b0585aa5b2dab99bf99fc5fff517131dbb097e0bb52310900a",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed11/harnesses/c1/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed12/harnesses/base/LongTermMEMORY.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed12/harnesses/base/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed12/harnesses/base/systemprompt.md": "839276c13b0765dc1c19f0496b5d6dc8781ea036dce992ea3725b6e0bc8c3a96",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed12/harnesses/base/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed12/harnesses/c1/LongTermMEMORY.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed12/harnesses/c1/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed12/harnesses/c1/skills/merchant-operating-cycle/SKILL.md": "5672fc8a666268207be77eafaef52d9be9e36c4826662b1776c183483e010fce",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed12/harnesses/c1/systemprompt.md": "ab06c792425019eba2b5c06cd14c4a26f4881f2d0a85a2994a613e53103484e9",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed12/harnesses/c1/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed13/harnesses/base/LongTermMEMORY.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed13/harnesses/base/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed13/harnesses/base/systemprompt.md": "839276c13b0765dc1c19f0496b5d6dc8781ea036dce992ea3725b6e0bc8c3a96",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed13/harnesses/base/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed13/harnesses/c1/LongTermMEMORY.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed13/harnesses/c1/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed13/harnesses/c1/skills/merchant-operating-cycle/SKILL.md": "ab43723878e29867be956dfa0ecb7617ab8f766f0845c9fd902a3acc9ac3bb76",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed13/harnesses/c1/systemprompt.md": "2560a0213ec30cba18388ebc81b6bcaa41860addd117f135c3e69d4f162456f8",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed13/harnesses/c1/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed14/harnesses/base/LongTermMEMORY.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed14/harnesses/base/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed14/harnesses/base/systemprompt.md": "839276c13b0765dc1c19f0496b5d6dc8781ea036dce992ea3725b6e0bc8c3a96",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed14/harnesses/base/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed14/harnesses/c1/LongTermMEMORY.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed14/harnesses/c1/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed14/harnesses/c1/systemprompt.md": "839276c13b0765dc1c19f0496b5d6dc8781ea036dce992ea3725b6e0bc8c3a96",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed14/harnesses/c1/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed15/harnesses/base/LongTermMEMORY.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed15/harnesses/base/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed15/harnesses/base/systemprompt.md": "839276c13b0765dc1c19f0496b5d6dc8781ea036dce992ea3725b6e0bc8c3a96",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed15/harnesses/base/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed15/harnesses/c1/LongTermMEMORY.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed15/harnesses/c1/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed15/harnesses/c1/skills/merchant-operating-cycle/SKILL.md": "d765860485a4902dcb088cf805b234b235241ce0196d23a3f8915981de722efd",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed15/harnesses/c1/systemprompt.md": "82270c6ff750bd3a3aff2c26ff107b6d0f770b136254ccaf211d4730cfd0cb0f",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed15/harnesses/c1/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed16/harnesses/base/LongTermMEMORY.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed16/harnesses/base/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed16/harnesses/base/systemprompt.md": "839276c13b0765dc1c19f0496b5d6dc8781ea036dce992ea3725b6e0bc8c3a96",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed16/harnesses/base/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed16/harnesses/c1/LongTermMEMORY.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed16/harnesses/c1/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed16/harnesses/c1/skills/merchant-operating-cycle/SKILL.md": "ab6f26d2de11df0c4dde9681a5311193e1aa4991dbacc093ee31327bbe7e32fb",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed16/harnesses/c1/systemprompt.md": "8e6ab63bc8c21bf8720dbba269dae6cec3b7d99c2759a54cdf7098a6fe85270b",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed16/harnesses/c1/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed17/harnesses/base/LongTermMEMORY.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed17/harnesses/base/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed17/harnesses/base/systemprompt.md": "839276c13b0765dc1c19f0496b5d6dc8781ea036dce992ea3725b6e0bc8c3a96",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed17/harnesses/base/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed17/harnesses/c1/LongTermMEMORY.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed17/harnesses/c1/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed17/harnesses/c1/skills/merchant-operating-cycle/SKILL.md": "caaf27e97e7154b510f52392a490f7788bf589fce5e90d80b8023be868c084be",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed17/harnesses/c1/skills/merchant-operating-cycle/scripts/build_batch.py": "a360ccf77d664f200e07bc137acb4485de4e7e6f6bd137d0add4dd987d84d1c5",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed17/harnesses/c1/skills/merchant-operating-cycle/scripts/check_history.py": "ebfc20652106cd2aace3ca6677e5eb8f35d73065a2d4d8430d7c7a3880733e57",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed17/harnesses/c1/systemprompt.md": "82270c6ff750bd3a3aff2c26ff107b6d0f770b136254ccaf211d4730cfd0cb0f",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed17/harnesses/c1/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed18/harnesses/base/LongTermMEMORY.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed18/harnesses/base/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed18/harnesses/base/systemprompt.md": "839276c13b0765dc1c19f0496b5d6dc8781ea036dce992ea3725b6e0bc8c3a96",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed18/harnesses/base/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed18/harnesses/c1/LongTermMEMORY.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed18/harnesses/c1/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed18/harnesses/c1/skills/merchant-cash-and-order-control/SKILL.md": "4cc1ec3126b667dcc215dfef621c51ed99ae05245a8ed5262c971a78690fc0b9",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed18/harnesses/c1/systemprompt.md": "72f7664e7283edce738bfe2b882476cb7e594cf86560c56cf9dcfe8d5dac1b61",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed18/harnesses/c1/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed19/harnesses/base/LongTermMEMORY.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed19/harnesses/base/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed19/harnesses/base/systemprompt.md": "839276c13b0765dc1c19f0496b5d6dc8781ea036dce992ea3725b6e0bc8c3a96",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed19/harnesses/base/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed19/harnesses/c1/LongTermMEMORY.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed19/harnesses/c1/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed19/harnesses/c1/skills/merchant-operating-cycle/SKILL.md": "669c61c32088b96ce3435b9944feffda57f82be70351301accb2c26346862246",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed19/harnesses/c1/skills/merchant-operating-cycle/scripts/check_batch.py": "8e9651249d0731f9b3b78f90cbb66d35b584cab8b6cba6ee53e8232a2f99e750",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed19/harnesses/c1/skills/merchant-operating-cycle/scripts/check_history.py": "cb3e6b2443874580e8f123885d421e7cee0266d088748c74863ec5e38b7e2bbc",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed19/harnesses/c1/systemprompt.md": "ab6f6bf581ff109e63e35687d0208aaa01a78be27b91c12daa06a9357c230388",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/adapt/ecom-oc-seq1-s10/synthetic__train24h-seed19/harnesses/c1/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/episodes/11d42e5e4e6d0024dda39870/measurement/episode.json": "1349166e5956a60848f2b3129219ee9163ccc9c61c31992acfb03186d25ca591",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/episodes/31ee3b5236db909a3530bdc2/measurement/episode.json": "c54d7705ebebe85e21f2696d6c0f5af9da10c2d301d9a608f45d2ad49f719b3c",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/episodes/33961656c254673cd66b6bd1/measurement/episode.json": "27abd0e46a131e3266546b641493c0519d8a6b68919f076e8ffeb4025fe9f6c9",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/episodes/3fe8ef0230d833c0cdc0593a/measurement/episode.json": "9e72d31e65f000f06aca3e2e1ca66babc5980300e1ea58361b0d6052efe94148",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/episodes/407b081239cd27f1da2cbac5/measurement/episode.json": "9da056403e3bbfdb537c6643446c96884a36279b73ed9d720cf3afa4336afed0",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/episodes/69ced4c69d6b7812783a5b38/measurement/episode.json": "a9ff368d7eb45ad5f5ed2eba58783793d89fa6d391a6ff7d36c5ddaa314c67c0",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/episodes/75fc526b6788d0fd5ffd03bb/measurement/episode.json": "dc4caa0b9d5b34876c7380d01a101188c6b3d8284298d46ebdcde68c3894cf41",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/episodes/85976ac0eca8559f971515e9/measurement/episode.json": "dbbbde24694a1aca0bda06ff7a546dfdfa1926912d8f7e8262e333c855eee9e0",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/episodes/8628ddcf931e79ca0ce2ebc7/measurement/episode.json": "07d83be0d5ba03cde6540b3cbcddf990ac3c27ab3dfc520fffcc5a5a7bed6ec1",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/episodes/a27116df75db2bae9a2166de/measurement/episode.json": "0da2ed0cee33b54fe2aa8040d5ed75f4e8f8014aeb185ed1ed7a0126959341f6",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/episodes/b3ed9d053161f75e2d89bd1e/measurement/episode.json": "949278a4b1e8efb63aa2e1dcc125d01c97430fe69dc2dde54aab68cd12d41c03",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/episodes/b6202dab49187d096fbd6051/measurement/episode.json": "7798276418e51b50718bbcbd44c924d3da04d8137e710de597b61fad51f34179",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/episodes/c5d6061b5bc9044fcd0679b2/measurement/episode.json": "2f3bc227d48c47627c5c050bef99899f8b9446152a99bc1a2925dfeaec5f1bf8",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/episodes/ca3caa59bd49e1f0cf5740cc/measurement/episode.json": "88306bcd47cabdf3b944997ed96d8c91a1cf932b0747d22698b16fb35a33ef5d",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/episodes/e4db51d494c3ddda43aab2b1/measurement/episode.json": "3a5718fb8d1c7edbeb4dc0d07473a97388a9ff84cc173a1ec75b40217e688970",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/episodes/f62a0077a8bdeaea62804ca4/measurement/episode.json": "a98d2dafd26629548764d381a1d8283a35f6f919b86c119de63283a75864b212",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/episodes/f7cb0eb75f162d5e1e9b846c/measurement/episode.json": "0d6abc4552c346159413cff717770f957603e201a23fca3f5d23f057f2ed755c",
+    "runs/ecom-train-20261023-102614-1d6e02/ecom/episodes/f88ea9095d780bc0cc8b0985/measurement/episode.json": "0c4a5546f7b831aa05cc3372e3c2a1d1a28748515f65d44899ddfa24a4095b22",
+    "runs/ecom-train-20261023-102614-1d6e02/job-status.json": "449338677c0d611c7a5b2a661197c95194d189b0ae6be68c0ac093a04770284e",
+    "runs/ecom-train-20261023-102614-1d6e02/results-summary.json": "7ad19e0a4f7fdca650c1550f62f0135e29ffafb91808ab5b19d88732aa5c9166",
+    "runs/ecom-train-20261023-102614-1d6e02/train.json": "50d5774b8e423672acc8473b25ef341ca899b3827d2dca3f9f3f9e1dcf48e0e6"
+  }
+}

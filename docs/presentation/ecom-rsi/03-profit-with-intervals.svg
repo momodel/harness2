@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+<title id="title">冻结候选提高了收益，但不是每次都赢</title>
+<desc id="desc">固定模型、固定双臂、新 seed；区间按 seed 聚类计算，不把同一 seed 的重复当作独立样本。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10Z" fill="context-stroke"/></marker></defs>
+<style>text{font-family:"PingFang SC","Hiragino Sans GB","Noto Sans CJK SC",sans-serif}.title{font-family:"Songti SC","Noto Serif CJK SC",serif;font-weight:700}.num{font-family:"Avenir Next","PingFang SC",sans-serif;font-weight:600}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<rect x="0" y="0" width="1920" height="1080" rx="0" fill="#F7F6F0" stroke="none"/>
+<text x="80" y="65" font-size="20" fill="#647475" font-weight="600" text-anchor="start" class="">HARNESS RSI  /  MERCHANTBENCH     •     实验证据 03</text>
+<text x="80" y="140" font-size="54" fill="#183134" font-weight="400" text-anchor="start" class="title">冻结候选提高了收益，但不是每次都赢</text>
+<text x="80" y="187" font-size="25" fill="#647475" font-weight="400" text-anchor="start" class="">固定模型、固定双臂、新 seed；区间按 seed 聚类计算，不把同一 seed 的重复当作独立样本。</text>
+<path d="M80 216L1840 216" fill="none" stroke="#D8DED6" stroke-width="1.5" stroke-linejoin="round"  />
+<text x="1840" y="65" font-size="20" fill="#647475" font-weight="400" text-anchor="end" class="mono">03 / 04</text>
+<text x="80" y="265" font-size="24" fill="#647475" font-weight="400" text-anchor="start" class="">10 个 seed  ×  3 次重复  ×  2 个版本   =   60 次完整执行；无技术失败、无缺失配对</text>
+<rect x="80" y="300" width="930" height="530" rx="10" fill="#FFFFFF" stroke="#D8DED6"/>
+<rect x="1050" y="300" width="790" height="530" rx="10" fill="#E5F1E9" stroke="none"/>
+<text x="112" y="352" font-size="29" fill="#183134" font-weight="600" text-anchor="start" class="">平均净利润与 95% 区间</text>
+<text x="112" y="390" font-size="20" fill="#647475" font-weight="400" text-anchor="start" class="">点为均值；须线为均值区间，不是收益标准差</text>
+<path d="M295.0 425L295.0 690" fill="none" stroke="#D8DED6" stroke-width="1" stroke-linejoin="round" stroke-dasharray="4 6" />
+<text x="295.0" y="732" font-size="20" fill="#647475" font-weight="400" text-anchor="middle" class="num">0</text>
+<path d="M457.5 425L457.5 690" fill="none" stroke="#D8DED6" stroke-width="1" stroke-linejoin="round" stroke-dasharray="4 6" />
+<text x="457.5" y="732" font-size="20" fill="#647475" font-weight="400" text-anchor="middle" class="num">300</text>
+<path d="M620.0 425L620.0 690" fill="none" stroke="#D8DED6" stroke-width="1" stroke-linejoin="round" stroke-dasharray="4 6" />
+<text x="620.0" y="732" font-size="20" fill="#647475" font-weight="400" text-anchor="middle" class="num">600</text>
+<path d="M782.5 425L782.5 690" fill="none" stroke="#D8DED6" stroke-width="1" stroke-linejoin="round" stroke-dasharray="4 6" />
+<text x="782.5" y="732" font-size="20" fill="#647475" font-weight="400" text-anchor="middle" class="num">900</text>
+<path d="M945.0 425L945.0 690" fill="none" stroke="#D8DED6" stroke-width="1" stroke-linejoin="round" stroke-dasharray="4 6" />
+<text x="945.0" y="732" font-size="20" fill="#647475" font-weight="400" text-anchor="middle" class="num">1200</text>
+<text x="112" y="498" font-size="25" fill="#879391" font-weight="600" text-anchor="start" class="">Base</text>
+<path d="M509.1545464403433 490L586.9335356381478 490" fill="none" stroke="#879391" stroke-width="5" stroke-linejoin="round"  />
+<path d="M509.1545464403433 478L509.1545464403433 502" fill="none" stroke="#879391" stroke-width="3" stroke-linejoin="round"  />
+<path d="M586.9335356381478 478L586.9335356381478 502" fill="none" stroke="#879391" stroke-width="3" stroke-linejoin="round"  />
+<circle cx="549.1228849539687" cy="490" r="10" fill="#879391" stroke="#FFFFFF" stroke-width="3"/>
+<text x="549.1228849539687" y="463" font-size="34" fill="#879391" font-weight="400" text-anchor="middle" class="num">469.15</text>
+<text x="549.1228849539687" y="534" font-size="22" fill="#647475" font-weight="400" text-anchor="middle" class="">[395.36, 538.95]</text>
+<text x="112" y="643" font-size="25" fill="#087D70" font-weight="600" text-anchor="start" class="">冻结候选</text>
+<path d="M681.44357790782 635L774.7457335273757 635" fill="none" stroke="#087D70" stroke-width="5" stroke-linejoin="round"  />
+<path d="M681.44357790782 623L681.44357790782 647" fill="none" stroke="#087D70" stroke-width="3" stroke-linejoin="round"  />
+<path d="M774.7457335273757 623L774.7457335273757 647" fill="none" stroke="#087D70" stroke-width="3" stroke-linejoin="round"  />
+<circle cx="731.4617173340976" cy="635" r="10" fill="#087D70" stroke="#FFFFFF" stroke-width="3"/>
+<text x="731.4617173340976" y="608" font-size="34" fill="#087D70" font-weight="400" text-anchor="middle" class="num">805.78</text>
+<text x="731.4617173340976" y="679" font-size="22" fill="#647475" font-weight="400" text-anchor="middle" class="">[713.43, 885.68]</text>
+<text x="112" y="788" font-size="21" fill="#647475" font-weight="400" text-anchor="start" class="">横轴：模拟货币单位；最终结算后的净利润</text>
+<text x="1086" y="352" font-size="28" fill="#183134" font-weight="600" text-anchor="start" class="">主要结论：候选 − Base 的配对增益</text>
+<text x="1086" y="457" font-size="86" fill="#087D70" font-weight="400" text-anchor="start" class="num">+336.63</text>
+<text x="1090" y="526" font-size="25" fill="#087D70" font-weight="400" text-anchor="start" class="">相对 Base 的利润均值提高 71.75%</text>
+<path d="M1229.2857142857142 550L1229.2857142857142 673" fill="none" stroke="#647475" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 6" />
+<path d="M1140.0 620L1765.0 620" fill="none" stroke="#D8DED6" stroke-width="2" stroke-linejoin="round"  />
+<path d="M1431.9189264198083 620L1630.37938562513 620" fill="none" stroke="#087D70" stroke-width="7" stroke-linejoin="round"  />
+<path d="M1431.9189264198083 603L1431.9189264198083 637" fill="none" stroke="#087D70" stroke-width="3" stroke-linejoin="round"  />
+<path d="M1630.37938562513 603L1630.37938562513 637" fill="none" stroke="#087D70" stroke-width="3" stroke-linejoin="round"  />
+<circle cx="1529.8442291980148" cy="620" r="12" fill="#087D70" stroke="#FFFFFF" stroke-width="3"/>
+<text x="1140.0" y="703" font-size="20" fill="#647475" font-weight="400" text-anchor="middle" class="num">-100</text>
+<text x="1229.2857142857142" y="703" font-size="20" fill="#647475" font-weight="400" text-anchor="middle" class="num">0</text>
+<text x="1407.857142857143" y="703" font-size="20" fill="#647475" font-weight="400" text-anchor="middle" class="num">200</text>
+<text x="1586.4285714285716" y="703" font-size="20" fill="#647475" font-weight="400" text-anchor="middle" class="num">400</text>
+<text x="1765.0" y="703" font-size="20" fill="#647475" font-weight="400" text-anchor="middle" class="num">600</text>
+<text x="1086" y="766" font-size="31" fill="#087D70" font-weight="400" text-anchor="start" class="num">95% CI  [+226.95, +449.22]</text>
+<text x="80" y="900" font-size="42" fill="#087D70" font-weight="400" text-anchor="start" class="num">25 / 30</text>
+<text x="295" y="895" font-size="22" fill="#183134" font-weight="400" text-anchor="start" class="">配对中候选收益更高</text>
+<text x="680" y="900" font-size="42" fill="#087D70" font-weight="400" text-anchor="start" class="num">10 / 10</text>
+<text x="895" y="895" font-size="22" fill="#183134" font-weight="400" text-anchor="start" class="">seed 的平均收益差为正</text>
+<text x="1280" y="900" font-size="42" fill="#087D70" font-weight="400" text-anchor="start" class="num">30 / 30</text>
+<text x="1495" y="895" font-size="22" fill="#183134" font-weight="400" text-anchor="start" class="">完整配对；没有删除失败样本</text>
+<path d="M80 980L1840 980" fill="none" stroke="#D8DED6" stroke-width="1.5" stroke-linejoin="round"  />
+<text x="80" y="1015" font-size="20" fill="#647475" font-weight="400" text-anchor="start" class="">2,000 次 seed 聚类 bootstrap（固定随机种子）；双臂区间为本次离线补算，配对差区间复现最终报告。</text>
+<text x="80" y="1049" font-size="17" fill="#647475" font-weight="400" text-anchor="start" class="">来源：最终 report.json 与 60 份 results；24 小时经营窗口含后续订单结算。公开合成、同分布新 seed，不代表真实店铺或全年收益。</text>
+</svg>

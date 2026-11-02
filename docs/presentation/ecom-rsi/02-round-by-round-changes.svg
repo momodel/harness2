@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+<title id="title">逐轮修改：看实际改动，也保留失败</title>
+<desc id="desc">最新训练批次的真实任务顺序；每个任务执行 k=1，不是同一个版本连续升级 10 次。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10Z" fill="context-stroke"/></marker></defs>
+<style>text{font-family:"PingFang SC","Hiragino Sans GB","Noto Sans CJK SC",sans-serif}.title{font-family:"Songti SC","Noto Serif CJK SC",serif;font-weight:700}.num{font-family:"Avenir Next","PingFang SC",sans-serif;font-weight:600}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<rect x="0" y="0" width="1920" height="1080" rx="0" fill="#F7F6F0" stroke="none"/>
+<text x="80" y="65" font-size="20" fill="#647475" font-weight="600" text-anchor="start" class="">HARNESS RSI  /  MERCHANTBENCH     •     实验证据 02</text>
+<text x="80" y="140" font-size="54" fill="#183134" font-weight="400" text-anchor="start" class="title">逐轮修改：看实际改动，也保留失败</text>
+<text x="80" y="187" font-size="25" fill="#647475" font-weight="400" text-anchor="start" class="">最新训练批次的真实任务顺序；每个任务执行 k=1，不是同一个版本连续升级 10 次。</text>
+<path d="M80 216L1840 216" fill="none" stroke="#D8DED6" stroke-width="1.5" stroke-linejoin="round"  />
+<text x="1840" y="65" font-size="20" fill="#647475" font-weight="400" text-anchor="end" class="mono">02 / 04</text>
+<rect x="80" y="242" width="1760" height="53" rx="4" fill="#183134" stroke="none"/>
+<text x="104" y="276" font-size="21" fill="#FFFFFF" font-weight="400" text-anchor="start" class="">轮次</text>
+<text x="225" y="276" font-size="21" fill="#FFFFFF" font-weight="400" text-anchor="start" class="">任务 seed</text>
+<text x="390" y="276" font-size="21" fill="#FFFFFF" font-weight="400" text-anchor="start" class="">最终候选的主要改动 / 观察</text>
+<text x="1160" y="276" font-size="21" fill="#FFFFFF" font-weight="400" text-anchor="start" class="">相对 Base 的有效文件</text>
+<text x="1510" y="276" font-size="21" fill="#FFFFFF" font-weight="400" text-anchor="start" class="">执行状态</text>
+<text x="1810" y="276" font-size="21" fill="#FFFFFF" font-weight="400" text-anchor="end" class="">利润差</text>
+<rect x="80" y="305" width="1760" height="53" rx="0" fill="#FFFFFF" stroke="none"/>
+<text x="104" y="340" font-size="22" fill="#647475" font-weight="400" text-anchor="start" class="mono">01</text>
+<text x="225" y="340" font-size="25" fill="#183134" font-weight="600" text-anchor="start" class="num">11</text>
+<text x="390" y="340" font-size="23" fill="#183134" font-weight="400" text-anchor="start" class="">现金容量规划；桥接输出解析与执行技能</text>
+<text x="1160" y="340" font-size="21" fill="#647475" font-weight="400" text-anchor="start" class="">提示 + 2 技能 + 1 脚本</text>
+<text x="1510" y="340" font-size="20" fill="#647475" font-weight="600" text-anchor="start" class="">完整</text>
+<text x="1810" y="340" font-size="25" fill="#087D70" font-weight="400" text-anchor="end" class="num">+406.32</text>
+<rect x="80" y="360" width="1760" height="53" rx="0" fill="#F7F6F0" stroke="none"/>
+<text x="104" y="395" font-size="22" fill="#647475" font-weight="400" text-anchor="start" class="mono">02</text>
+<text x="225" y="395" font-size="25" fill="#183134" font-weight="600" text-anchor="start" class="num">16</text>
+<text x="390" y="395" font-size="23" fill="#183134" font-weight="400" text-anchor="start" class="">经营周期技能；资金容量与交付风险检查</text>
+<text x="1160" y="395" font-size="21" fill="#647475" font-weight="400" text-anchor="start" class="">提示 + 1 技能</text>
+<text x="1510" y="395" font-size="20" fill="#647475" font-weight="600" text-anchor="start" class="">完整</text>
+<text x="1810" y="395" font-size="25" fill="#087D70" font-weight="400" text-anchor="end" class="num">+749.01</text>
+<rect x="80" y="415" width="1760" height="53" rx="0" fill="#FFFFFF" stroke="none"/>
+<text x="104" y="450" font-size="22" fill="#647475" font-weight="400" text-anchor="start" class="mono">03</text>
+<text x="225" y="450" font-size="25" fill="#183134" font-weight="600" text-anchor="start" class="num">18</text>
+<text x="390" y="450" font-size="23" fill="#183134" font-weight="400" text-anchor="start" class="">现金与订单核对；供应商事件先映射再下架</text>
+<text x="1160" y="450" font-size="21" fill="#647475" font-weight="400" text-anchor="start" class="">提示 + 1 技能</text>
+<text x="1510" y="450" font-size="20" fill="#647475" font-weight="600" text-anchor="start" class="">完整</text>
+<text x="1810" y="450" font-size="25" fill="#B54C3B" font-weight="400" text-anchor="end" class="num">-5.34</text>
+<rect x="80" y="470" width="1760" height="53" rx="0" fill="#F7F6F0" stroke="none"/>
+<text x="104" y="505" font-size="22" fill="#647475" font-weight="400" text-anchor="start" class="mono">04</text>
+<text x="225" y="505" font-size="25" fill="#183134" font-weight="600" text-anchor="start" class="num">13</text>
+<text x="390" y="505" font-size="23" fill="#183134" font-weight="400" text-anchor="start" class="">分窗口经营规则；最终仍扩大货架并亏损</text>
+<text x="1160" y="505" font-size="21" fill="#647475" font-weight="400" text-anchor="start" class="">提示 + 1 技能</text>
+<text x="1510" y="505" font-size="20" fill="#B54C3B" font-weight="600" text-anchor="start" class="">完整 · 亏损</text>
+<text x="1810" y="505" font-size="25" fill="#B54C3B" font-weight="400" text-anchor="end" class="num">-425.63</text>
+<rect x="80" y="525" width="1760" height="53" rx="0" fill="#FFFFFF" stroke="none"/>
+<text x="104" y="560" font-size="22" fill="#647475" font-weight="400" text-anchor="start" class="mono">05</text>
+<text x="225" y="560" font-size="25" fill="#183134" font-weight="600" text-anchor="start" class="num">19</text>
+<text x="390" y="560" font-size="23" fill="#183134" font-weight="400" text-anchor="start" class="">经营技能 + 批次检查、历史检查脚本</text>
+<text x="1160" y="560" font-size="21" fill="#647475" font-weight="400" text-anchor="start" class="">提示 + 1 技能 + 2 脚本</text>
+<text x="1510" y="560" font-size="20" fill="#647475" font-weight="600" text-anchor="start" class="">完整</text>
+<text x="1810" y="560" font-size="25" fill="#087D70" font-weight="400" text-anchor="end" class="num">+551.09</text>
+<rect x="80" y="580" width="1760" height="53" rx="0" fill="#E5F1E9" stroke="none"/>
+<rect x="80" y="580" width="5" height="53" rx="0" fill="#087D70" stroke="none"/>
+<text x="104" y="615" font-size="22" fill="#647475" font-weight="400" text-anchor="start" class="mono">06</text>
+<text x="225" y="615" font-size="25" fill="#183134" font-weight="600" text-anchor="start" class="num">15</text>
+<text x="390" y="615" font-size="23" fill="#183134" font-weight="400" text-anchor="start" class="">分窗口预算、储备与已成交采购均价检查</text>
+<text x="1160" y="615" font-size="21" fill="#647475" font-weight="400" text-anchor="start" class="">提示 + 1 技能</text>
+<text x="1510" y="615" font-size="20" fill="#087D70" font-weight="600" text-anchor="start" class="">完整 · 冻结源</text>
+<text x="1810" y="615" font-size="25" fill="#087D70" font-weight="400" text-anchor="end" class="num">+673.82</text>
+<rect x="80" y="635" width="1760" height="53" rx="0" fill="#FFFFFF" stroke="none"/>
+<text x="104" y="670" font-size="22" fill="#647475" font-weight="400" text-anchor="start" class="mono">07</text>
+<text x="225" y="670" font-size="25" fill="#183134" font-weight="600" text-anchor="start" class="num">12</text>
+<text x="390" y="670" font-size="23" fill="#183134" font-weight="400" text-anchor="start" class="">低采购成本选品；资金容量与订单核对</text>
+<text x="1160" y="670" font-size="21" fill="#647475" font-weight="400" text-anchor="start" class="">提示 + 1 技能</text>
+<text x="1510" y="670" font-size="20" fill="#647475" font-weight="600" text-anchor="start" class="">完整</text>
+<text x="1810" y="670" font-size="25" fill="#087D70" font-weight="400" text-anchor="end" class="num">+405.17</text>
+<rect x="80" y="690" width="1760" height="53" rx="0" fill="#F7F6F0" stroke="none"/>
+<text x="104" y="725" font-size="22" fill="#647475" font-weight="400" text-anchor="start" class="mono">08</text>
+<text x="225" y="725" font-size="25" fill="#183134" font-weight="600" text-anchor="start" class="num">17</text>
+<text x="390" y="725" font-size="23" fill="#183134" font-weight="400" text-anchor="start" class="">批次构建、历史校验；区分发货与总交期</text>
+<text x="1160" y="725" font-size="21" fill="#647475" font-weight="400" text-anchor="start" class="">提示 + 1 技能 + 2 脚本</text>
+<text x="1510" y="725" font-size="20" fill="#647475" font-weight="600" text-anchor="start" class="">完整</text>
+<text x="1810" y="725" font-size="25" fill="#087D70" font-weight="400" text-anchor="end" class="num">+450.21</text>
+<rect x="80" y="745" width="1760" height="53" rx="0" fill="#FFFFFF" stroke="none"/>
+<text x="104" y="780" font-size="22" fill="#647475" font-weight="400" text-anchor="start" class="mono">09</text>
+<text x="225" y="780" font-size="25" fill="#183134" font-weight="600" text-anchor="start" class="num">10</text>
+<text x="390" y="780" font-size="23" fill="#183134" font-weight="400" text-anchor="start" class="">基线经营失败；没有进入候选修改</text>
+<text x="1160" y="780" font-size="21" fill="#647475" font-weight="400" text-anchor="start" class="">—</text>
+<text x="1510" y="780" font-size="20" fill="#B54C3B" font-weight="600" text-anchor="start" class="">失败</text>
+<text x="1810" y="780" font-size="25" fill="#647475" font-weight="400" text-anchor="end" class="num">—</text>
+<rect x="80" y="800" width="1760" height="53" rx="0" fill="#F7F6F0" stroke="none"/>
+<text x="104" y="835" font-size="22" fill="#647475" font-weight="400" text-anchor="start" class="mono">10</text>
+<text x="225" y="835" font-size="25" fill="#183134" font-weight="600" text-anchor="start" class="num">14</text>
+<text x="390" y="835" font-size="23" fill="#183134" font-weight="400" text-anchor="start" class="">合成回退到 Base；最终没有有效新改动</text>
+<text x="1160" y="835" font-size="21" fill="#647475" font-weight="400" text-anchor="start" class="">0（与 Base 相同）</text>
+<text x="1510" y="835" font-size="20" fill="#647475" font-weight="600" text-anchor="start" class="">回退</text>
+<text x="1810" y="835" font-size="25" fill="#B54C3B" font-weight="400" text-anchor="end" class="num">-16.91</text>
+<rect x="80" y="885" width="1760" height="65" rx="5" fill="#FFFFFF" stroke="#D8DED6"/>
+<text x="104" y="926" font-size="24" fill="#183134" font-weight="400" text-anchor="start" class="">共享的是前序经验；表中每次文件差异都相对固定 Base。利润差来自各自任务，不能当作版本升级曲线。</text>
+<path d="M80 980L1840 980" fill="none" stroke="#D8DED6" stroke-width="1.5" stroke-linejoin="round"  />
+<text x="80" y="1015" font-size="20" fill="#647475" font-weight="400" text-anchor="start" class="">利润差 = 本任务最终净利润 − Base 净利润，单位为模拟货币；缺失不记为 0，回退不算成功改进。</text>
+<text x="80" y="1049" font-size="17" fill="#647475" font-weight="400" text-anchor="start" class="">来源：train.json 的任务顺序、各任务 summary 与实际候选文件、原生 measurement；改动不构成单规则因果归因。</text>
+</svg>
