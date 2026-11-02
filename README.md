@@ -46,6 +46,10 @@ task-level recursion budget brings further gains.
 
 The release supports **parallel and sequential recursion**, **OpenCode and
 Codex executors**, and **JobBench, LAB, and WorkBuddy-Bench**.
+This checkout additionally includes a trusted-local
+[MerchantBench e-commerce adapter](docs/MERCHANTBENCH.md), with native net-asset scoring.
+For parameterised local training and a read-only live dashboard, see the
+[e-commerce training guide](docs/ECOM_TRAIN.md).
 
 ## Video overview
 
@@ -131,6 +135,7 @@ selection without model calls.
 | JobBench | Professional work | `harness2-setup jb` | [JobBench](docs/BENCHMARKS.md#jobbench) |
 | LAB | Legal work | `harness2-setup lab` | [LAB](docs/BENCHMARKS.md#lab) |
 | WorkBuddy-Bench | Office, web, and code | `harness2-setup wb` | [WorkBuddy](docs/BENCHMARKS.md#workbuddy-bench) |
+| MerchantBench (local extension) | Simulated merchant operations, public synthetic data | `harness2-setup ecom` | [MerchantBench](docs/MERCHANTBENCH.md) |
 
 Choose one benchmark per command. WorkBuddy also takes `--subset office`,
 `--subset web`, or `--subset code` on every command after setup. The
