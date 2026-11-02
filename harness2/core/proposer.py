@@ -26,6 +26,8 @@ import json
 import os
 import re
 import shutil
+import signal
+import sqlite3
 import subprocess
 import tempfile
 import threading
@@ -34,6 +36,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from .. import config
+from . import execution_env as EE
 from .spec import ChannelSpec
 
 SYSTEM_ARG_MAX = 120_000
@@ -50,6 +53,169 @@ _DROP_ENV = (
     "ANTHROPIC_BEDROCK_BASE_URL",
     "CLAUDE_CODE_USE_BEDROCK",
 )
+
+
+def _phase(logs: Path, phase: str, **fields) -> None:
+    logs.mkdir(parents=True, exist_ok=True, mode=0o700)
+    path = logs / "process.json"
+    data = json.loads(path.read_text()) if path.exists() else {}
+    path.write_text(json.dumps({**data, "phase": phase, **fields}, indent=2) + "\n")
+
+
+def _run_logged(command, *, cwd, env, timeout, logs):
+    """Stream evidence to disk and reap the entire CLI/tool process group.
+
+    Logs may contain task data. Keep them under a private per-attempt directory;
+    never include credentials/environment values in the diagnostic summary.
+    """
+    _phase(logs, "model_cli", status="starting")
+    started = time.monotonic()
+    process = None
+    status = "launch_error"
+    try:
+        with (logs / "stdout.jsonl").open("w") as out, (logs / "stderr.log").open("w") as err:
+            process = subprocess.Popen(
+                command, cwd=cwd, env=env, stdout=out, stderr=err,
+                stdin=subprocess.DEVNULL, start_new_session=True,
+            )
+            _phase(logs, "model_cli", status="running", pid=process.pid)
+            try:
+                process.wait(timeout=timeout)
+                status = "exited"
+            except subprocess.TimeoutExpired:
+                status = "timeout"
+                raise
+            finally:
+                # Also clean up descendants after a normal leader exit.
+                for sig in (signal.SIGTERM, signal.SIGKILL):
+                    try:
+                        os.killpg(process.pid, sig)
+                    except ProcessLookupError:
+                        break
+                    if sig == signal.SIGTERM:
+                        try:
+                            process.wait(timeout=1)
+                        except subprocess.TimeoutExpired:
+                            pass
+                process.wait()
+    finally:
+        last = {}
+        stdout = (logs / "stdout.jsonl").read_text(errors="replace")
+        for line in reversed(stdout.splitlines()):
+            try:
+                event = json.loads(line)
+                part = event.get("part") or {}
+                last = {"type": event.get("type"), "timestamp": event.get("timestamp"),
+                        "tool": part.get("tool"), "status": (part.get("state") or {}).get("status")}
+                break
+            except (ValueError, AttributeError):
+                continue
+        _phase(logs, "model_cli", status=status, wall_s=round(time.monotonic() - started, 3),
+               returncode=process.returncode if process is not None else None, last_event=last)
+    return subprocess.CompletedProcess(command, process.returncode, stdout,
+                                      (logs / "stderr.log").read_text(errors="replace"))
+
+
+# Opt-in Bun preload: metadata only. Never inspect headers, bodies or URL paths.
+# A fetch_call is a JS invocation, NOT proof of bytes sent or provider acceptance.
+_FETCH_TRACE_JS = r"""
+import { appendFileSync } from "node:fs";
+const file = process.env.HARNESS2_HTTP_TRACE;
+const started = performance.now();
+let serial = 0;
+function record(event, fields = {}) {
+  try {
+    appendFileSync(file, JSON.stringify({event, pid: process.pid,
+      elapsed_ms: Math.round(performance.now() - started), ...fields}) + "\n", {mode: 0o600});
+  } catch {} // Diagnostics must not change request success/failure.
+}
+function errorKind(e) {
+  return ["AbortError", "TimeoutError", "TypeError", "Error"].includes(e?.name) ? e.name : "Other";
+}
+const original = globalThis.fetch;
+record("preload_ready");
+globalThis.fetch = async function(input, init) {
+  const id = ++serial;
+  let origin = "unknown";
+  try { origin = new URL(input instanceof Request ? input.url : String(input)).origin; } catch {}
+  const rawMethod = init?.method ?? (input instanceof Request ? input.method : "GET");
+  const method = ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"].includes(rawMethod)
+    ? rawMethod : "OTHER";
+  record("fetch_call", {id, origin, method});
+  let response;
+  try { response = await original.call(globalThis, input, init); }
+  catch (e) { record("fetch_error", {id, kind: errorKind(e)}); throw e; }
+  record("response_headers", {id, status: response.status});
+  if (!response.body) { record("body_end", {id}); return response; }
+  const reader = response.body.getReader();
+  let first = true;
+  // Pull only when consumed; no tee, SSE decoding, buffering of the full body, or retries.
+  const body = new ReadableStream({
+    async pull(controller) {
+      try {
+        const {done, value} = await reader.read();
+        if (done) { record("body_end", {id}); controller.close(); return; }
+        if (first && value.byteLength) {
+          first = false;
+          record("first_body_chunk", {id, bytes: value.byteLength});
+        }
+        controller.enqueue(value);
+      } catch (e) { record("body_error", {id, kind: errorKind(e)}); controller.error(e); }
+    },
+    cancel(reason) { record("body_cancel", {id}); return reader.cancel(reason); }
+  }, {highWaterMark: 0});
+  const wrapped = new Response(body, {
+    status: response.status, statusText: response.statusText, headers: response.headers
+  });
+  for (const key of ["url", "redirected", "type"]) {
+    Object.defineProperty(wrapped, key, {value: response[key]});
+  }
+  return wrapped;
+};
+"""
+
+
+def _retain_opencode_state(workspace: Path, logs: Path, *, database: bool) -> None:
+    """Preserve native logs (and opt-in SQLite snapshot) before deleting the workspace.
+
+    Only inspect private per-attempt XDG roots, never host HOME/auth/config. Snapshot
+    after process-group cleanup so WAL data is included without copying live sidecars.
+    Retention failures are diagnostic evidence, not a replacement for the original error.
+    """
+    artifacts, errors = [], []
+    for root in (workspace / ".harness2-env/data/opencode", workspace / ".ocdata/opencode"):
+        sources = list((root / "log").glob("*.log"))
+        if database:
+            sources += list(root.glob("opencode*.db"))
+        for source in sources:
+            if source.is_symlink() or not source.resolve().is_relative_to(workspace.resolve()):
+                continue
+            dest = logs / "native" / source.name
+            try:
+                dest.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+                if source.suffix == ".db":
+                    deadline = time.monotonic() + 3
+
+                    def progress(*_):
+                        if time.monotonic() > deadline:
+                            raise TimeoutError("SQLite snapshot deadline")
+
+                    with (
+                        contextlib.closing(sqlite3.connect(source.as_uri() + "?mode=ro", uri=True,
+                                                          timeout=1)) as src,
+                        contextlib.closing(sqlite3.connect(dest)) as dst,
+                    ):
+                        src.backup(dst, pages=128, progress=progress, sleep=0.05)
+                else:
+                    shutil.copyfile(source, dest)
+                dest.chmod(0o600)
+                artifacts.append(str(dest.relative_to(logs)))
+            except Exception as exc:
+                dest.unlink(missing_ok=True)
+                errors.append({"file": source.name, "kind": type(exc).__name__})
+    state = json.loads((logs / "process.json").read_text())
+    _phase(logs, state["phase"], runtime_evidence={"files": artifacts, "errors": errors,
+                                               "database_requested": database})
 
 
 def _obj(d: dict, key: str) -> dict:
@@ -94,11 +260,14 @@ class Proposer:
     spec: ChannelSpec
     audit_dir: Path | None = None
     attempts: int = 2
+    diagnostics: bool = field(default=False, kw_only=True)
     project: str = field(default_factory=lambda: config.VERTEX_PROJECT)
     region: str = field(default_factory=lambda: config.VERTEX_REGION)
     _calls: list[Reply] = field(default_factory=list)
 
     def __post_init__(self) -> None:
+        if EE.enabled() and self.spec.kind != "opencode":
+            raise config.ConfigError("Clean improver sessions currently require OpenCode")
         if not self.spec.model.strip():
             raise ValueError("Set HARNESS2_IMPROVER_MODEL before starting model sessions")
 
@@ -140,7 +309,8 @@ class Proposer:
         directory is destroyed -- e.g. "context/harness", which is how an edited tree comes back.
         """
 
-        cache_key = _call_fingerprint(label, mission, system, context_dir)
+        cache_key = _call_fingerprint(label, mission, system, context_dir,
+                                      diagnostics=self.diagnostics)
         cached = self._cached(label, cache_key, require_workspace=bool(harvest))
         if cached is not None:
             self._calls.append(cached)
@@ -155,13 +325,17 @@ class Proposer:
             if attempt > 1:
                 time.sleep(10 * (attempt - 1))
             tmp = Path(tempfile.mkdtemp(prefix="harness2-prop-"))
+            paths = self._paths(label, cache_key)
+            logs = (paths["meta"].with_suffix(".attempts") if paths else tmp / "attempts") / f"{tmp.name}-a{attempt}"
             try:
+                _phase(logs, "context_copy", status="starting")
                 if context_dir and Path(context_dir).is_dir():
                     shutil.copytree(context_dir, tmp / "context", dirs_exist_ok=True)
                 with _SEM if _SEM is not None else contextlib.nullcontext():
-                    text, cost, err = (
-                        self._claude_cli if self.spec.kind == "claude_cli" else self._opencode
-                    )(tmp, mission, system, wall)
+                    if self.spec.kind == "claude_cli":
+                        text, cost, err = self._claude_cli(tmp, mission, system, wall)
+                    else:
+                        text, cost, err = self._opencode(tmp, mission, system, wall, logs=logs)
                 spent_usd += cost
                 if not text.strip():
                     last = err or "empty reply"
@@ -182,12 +356,29 @@ class Proposer:
                 self._write_audit(r, mission, system, cache_key)
                 self._calls.append(r)
                 return r
-            except subprocess.TimeoutExpired:
-                last = f"timeout after {wall}s"
+            except subprocess.TimeoutExpired as exc:
+                phase = json.loads((logs / "process.json").read_text()).get("phase")
+                last = f"timeout after {exc.timeout}s during {phase}"
+                if (logs / "stdout.jsonl").is_file():
+                    spent_usd += _opencode_cost((logs / "stdout.jsonl").read_text(errors="replace"))
+                _phase(logs, phase, status="timeout", error=last)
             except Exception as exc:
                 last = f"{type(exc).__name__}: {exc}"
+                phase = json.loads((logs / "process.json").read_text()).get("phase")
+                _phase(logs, phase, status="error", error=last[:1000])
             finally:
-                shutil.rmtree(tmp, ignore_errors=True)
+                try:
+                    if self.spec.kind == "opencode":
+                        try:
+                            _retain_opencode_state(tmp, logs, database=self.diagnostics)
+                        except Exception as exc:
+                            # Even unexpected retention errors must not replace a
+                            # timeout, usable reply, or other original outcome.
+                            with contextlib.suppress(OSError, ValueError):
+                                state = json.loads((logs / "process.json").read_text())
+                                _phase(logs, state["phase"], retention_error=type(exc).__name__)
+                finally:
+                    shutil.rmtree(tmp, ignore_errors=True)
 
         r = Reply(
             label=label,
@@ -250,7 +441,7 @@ class Proposer:
             err = f"rc={p.returncode}: {(p.stderr or '')[-300:]}"
         return text, float(payload.get("total_cost_usd") or 0.0), err
 
-    def _opencode(self, cwd: Path, mission: str, system: str, wall: int) -> tuple[str, float, str]:
+    def _opencode(self, cwd: Path, mission: str, system: str, wall: int, *, logs: Path) -> tuple[str, float, str]:
         (cwd / "MISSION.md").write_text(
             (f"{system}\n\n---\n\n" if system else "") + mission, encoding="utf-8"
         )
@@ -266,20 +457,49 @@ class Proposer:
         )
         oc = _opencode_dir()
 
-        env = self.env()
+        _phase(logs, "prepare", status="running")
+        if EE.enabled():
+            env = EE.prepare(
+                cwd,
+                model=self.spec.model,
+                tool_dirs=(
+                    config.MERCHANTBENCH_PYTHON.parent,
+                    config.BUN.parent,
+                ),
+            )
+            audit = cwd / "environment.json"
+            _phase(logs, "startup_audit", status="running")
+            EE.audit(cwd, env, audit)
+            if self.audit_dir:
+                dest = self.audit_dir / "environments" / cwd.name
+                dest.mkdir(parents=True, exist_ok=True)
+                shutil.copy(audit, dest / "environment.json")
+        else:
+            env = self.env()
         env["OPENCODE_PERMISSION"] = json.dumps(
             {"external_directory": {"*": "deny", str(cwd): "allow", f"{cwd}/**": "allow"}}
         )
-        env["XDG_DATA_HOME"] = str(cwd / ".ocdata")
-        env["XDG_STATE_HOME"] = str(cwd / ".ocstate")
+        if not EE.enabled():
+            env["XDG_DATA_HOME"] = str(cwd / ".ocdata")
+            env["XDG_STATE_HOME"] = str(cwd / ".ocstate")
 
+        entry = "src/index.ts"
+        if self.diagnostics:
+            trace_script = (logs / "fetch-trace.mjs").resolve()
+            # The pinned package's bunfig preload overrides CLI --preload under
+            # --cwd. Import the unchanged native entry *after* the trace instead.
+            native_entry = (oc / "packages/opencode/src/index.ts").resolve().as_uri()
+            trace_script.write_text(_FETCH_TRACE_JS + f"\nawait import({json.dumps(native_entry)});\n")
+            trace_script.chmod(0o600)
+            env["HARNESS2_HTTP_TRACE"] = str((logs / "transport.jsonl").resolve())
+            entry = str(trace_script)
         cmd = [
             str(config.BUN),
             "run",
             "--cwd",
             str(oc / "packages" / "opencode"),
             "--conditions=browser",
-            "src/index.ts",
+            entry,
             "run",
             prompt,
             "--dir",
@@ -291,15 +511,9 @@ class Proposer:
         ]
         if self.spec.effort:
             cmd += ["--variant", self.spec.effort]
-        p = subprocess.run(
-            cmd,
-            cwd=cwd,
-            env=env,
-            text=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            timeout=wall,
-        )
+        if self.diagnostics:
+            cmd += ["--print-logs", "--log-level", "DEBUG"]
+        p = _run_logged(cmd, cwd=cwd, env=env, timeout=wall, logs=logs)
         cost = _opencode_cost(p.stdout)
         ans = out / "answer.md"
         if ans.is_file() and ans.read_text(errors="replace").strip():
@@ -375,10 +589,15 @@ class Proposer:
                     "channel": r.channel,
                     "model": self.spec.model,
                     "effort": self.spec.effort,
+                    "diagnostics_enabled": self.diagnostics,
+                    "environment": EE.identity(),
                     "attempts": r.attempts,
                     "wall_s": r.wall_s,
                     "cost_usd": r.cost_usd,
                     "error": r.error,
+                    "diagnostics": [
+                        str(f) for f in sorted(p["meta"].with_suffix(".attempts").glob("*/process.json"))
+                    ],
                 },
                 indent=2,
             ),
@@ -504,13 +723,18 @@ def _opencode_cost(stdout: str) -> float:
     return round(total, 6)
 
 
-def _call_fingerprint(label: str, mission: str, system: str, context_dir: Path | str | None) -> str:
+def _call_fingerprint(label: str, mission: str, system: str, context_dir: Path | str | None,
+                      *, diagnostics: bool = False) -> str:
     """Content-address one call, including its evidence and its mode/task workspace path.
 
     The resolved path is part of the key: the two modes can have byte-identical k=1 evidence
     and must still be independent draws.
     """
     h = hashlib.sha256()
+    if diagnostics:
+        h.update(b"opencode-diagnostics-v1\0")
+    if EE.enabled():
+        h.update(json.dumps(EE.identity(), sort_keys=True).encode())
     for value in (label, mission, system):
         h.update(value.encode("utf-8", errors="replace"))
         h.update(b"\0")

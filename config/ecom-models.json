@@ -1,0 +1,34 @@
+{
+  "provider": {
+    "ecom_deepseek": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "DeepSeek LAN Gateway",
+      "env": ["ECOM_LLM_API_KEY"],
+      "options": {
+        "baseURL": "http://10.52.16.108:8081/v1",
+        "apiKey": "{env:ECOM_LLM_API_KEY}"
+      },
+      "models": {
+        "DeepSeek-V4.1-Flash": {
+          "id": "DeepSeek-V4.1-Flash",
+          "name": "DeepSeek-V4.1-Flash",
+          "tool_call": true,
+          "reasoning": true,
+          "limit": {
+            "context": 1048576,
+            "output": 65536
+          },
+          "options": {
+            "thinking": {"type": "enabled"},
+            "reasoningEffort": "high"
+          },
+          "variants": {
+            "low": {"reasoningEffort": "low"},
+            "high": {"reasoningEffort": "high"},
+            "max": {"reasoningEffort": "max"}
+          }
+        }
+      }
+    }
+  }
+}

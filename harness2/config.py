@@ -101,18 +101,39 @@ SOLVER_MODEL_CX = env("HARNESS2_CODEX_MODEL", SOLVER_MODEL_OC.split("/", 1)[-1])
 IMPROVER_MODEL = env("HARNESS2_IMPROVER_MODEL", SOLVER_MODEL_OC)
 JUDGE_MODEL = env("HARNESS2_JUDGE_MODEL", "")
 
+# Explicit opt-in; scripts/ecom-clean.sh enables it without editing personal config.
+ENV_MODE = env("HARNESS2_ENV_MODE", "legacy")
+CLEAN_MODEL_CONFIG = (
+    Path(env("HARNESS2_CLEAN_MODEL_CONFIG", ROOT / "config/ecom-models.json"))
+    .expanduser()
+    .resolve()
+)
+
 DEPENDENCY_PINS = {
+    "merchantbench": "d9e5bd7519ab100193c21778aecfb59e30f24651",
     "job-bench-eval": "fa03a17f9ff662f136798a274e10011c3aa00fd0",
     "workbuddy-bench": "b516950be5b56eb3be406c2f76ee1c5111dcb57f",
     "harvey-labs": "b58a28ae9fde5ee4b810e53b4fd0a1915325a35d",
     "opencode": "23fb5e0516c99ac04a1aa46c193efda2e1b9bb24",
 }
 DEPENDENCY_ORIGINS = {
+    "merchantbench": "https://github.com/KhanCold/merchantbench.git",
     "job-bench-eval": "https://github.com/Job-Bench/job-bench-eval.git",
     "workbuddy-bench": "https://github.com/Tencent/workbuddy-bench.git",
     "harvey-labs": "https://github.com/harveyai/harvey-labs.git",
     "opencode": "https://github.com/anomalyco/opencode.git",
 }
+
+
+def merchantbench_repo() -> Path:
+    return DEPENDENCIES / "merchantbench"
+
+
+ECOM_TASKS_FILE = (
+    Path(env("HARNESS2_ECOM_TASKS_FILE", PKG / "benchmarks/ecom_tasks.json")).expanduser().resolve()
+)
+ECOM_TIMEOUT = env_int("HARNESS2_ECOM_TIMEOUT", 10800)
+MERCHANTBENCH_PYTHON = merchantbench_repo() / ".venv/bin/python"
 
 
 def jb_repo() -> Path:
