@@ -23,11 +23,12 @@ for arg in "$@"; do
 done
 case "$command" in
     prepare-tools) exec "$ROOT/.venv/bin/python" -m harness2.cli.ecom_tools "$@";;
+    pair) exec "$ROOT/.venv/bin/python" -m harness2.cli.ecom_pair "$@";;
     verify) exec "$ROOT/.venv/bin/python" -m unittest discover -s tests -p test_execution_env.py -v;;
     run) module=run_sweep;;
     check) module=check;;
     judge) module=judge;;
     report) module=report;;
-    *) echo 'Usage: sh scripts/ecom-clean.sh {prepare-tools|verify|check|run|judge|report} [flags]' >&2; exit 2;;
+    *) echo 'Usage: sh scripts/ecom-clean.sh {prepare-tools|pair|verify|check|run|judge|report} [flags]' >&2; exit 2;;
 esac
 exec "$ROOT/.venv/bin/python" -m "harness2.cli.$module" --bench ecom --substrate oc "$@"

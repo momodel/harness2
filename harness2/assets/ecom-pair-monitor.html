@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark">
+<title>Harness² · 冻结配对评测</title>
+<link rel="stylesheet" href="/style.css">
+<style>section{min-width:0}.pair-table{min-width:810px}.error-list{white-space:pre-wrap}.phase-list{display:block}.detail-result .num{font-size:17px}.notice{line-height:1.8}h1{letter-spacing:0}.metric-value b{font-weight:400}.detail-title{margin-top:8px}.table-note{line-height:1.8}</style>
+</head>
+<body>
+<a class="skip" href="#main-content">跳到运行详情</a>
+<div class="frame">
+<header class="topbar"><div class="brand"><span class="mark" aria-hidden="true">H²</span><div><div class="brand-name">Harness²</div><div class="eyebrow" lang="en">MERCHANTBENCH / FROZEN PAIRS</div></div></div><div class="connection"><span id="connection" class="muted" role="status"><i class="dot"></i> 正在连接</span><span class="readonly">LOCAL · READ ONLY</span></div></header>
+<main id="main-content">
+<div class="heading"><div><h1>冻结配对评测</h1><div id="root" class="runpath mono">正在读取实验目录</div></div><div id="jobStatus" class="status muted">等待状态</div></div>
+<div class="config" id="config"></div>
+<div id="notice" class="notice" role="status">仅读取保存的结果和日志，不会触发模型调用。</div>
+<section class="metrics" aria-label="评测概览">
+<div class="metric"><div class="metric-label">完整经营执行</div><div id="rollouts" class="metric-value">0 <span>/ 0</span></div><div id="rolloutFoot" class="metric-foot">计划与已执行分别统计</div></div>
+<div class="metric"><div class="metric-label">完整配对</div><div id="pairs" class="metric-value">0 <span>/ 0</span></div><div class="metric-foot">同 seed、同重复的 Base 与候选</div></div>
+<div class="metric"><div class="metric-label">技术失败 / 记录尝试</div><div id="failures" class="metric-value">0 <span>/ 0</span></div><div id="failureFoot" class="metric-foot">保留失败，不以缺失成绩计零</div></div>
+<div class="metric"><div class="metric-label">累计执行耗时</div><div id="elapsed" class="metric-value">未开始</div><div id="phase" class="metric-foot">不把旧 PID 当作在线</div></div>
+</section>
+<div id="progress" class="progress" role="progressbar" aria-label="完整经营进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+<div class="workspace"><section aria-labelledby="queueTitle">
+<div class="section-head"><h2 id="queueTitle">配对队列 <span id="queueCount" class="muted mono small"></span></h2><div class="tools"><label for="filter" class="small muted">筛选</label><select id="filter"><option value="all">全部配对</option><option value="running">运行中</option><option value="problem">失败与异常</option><option value="pending">待执行</option><option value="complete">已完成</option></select><button id="refresh" type="button">刷新</button></div></div>
+<div class="table-wrap"><table class="pair-table"><thead><tr><th>seed / 重复</th><th>Base</th><th>候选</th><th class="number">Base 利润</th><th class="number">候选利润</th><th class="number">差值</th></tr></thead><tbody id="queue"><tr><td colspan="6" class="empty">正在加载配对清单</td></tr></tbody></table></div>
+<div class="table-note"><span><span class="mobile-hint">横向滑动表格查看数值。 </span>重复从 r0 起。色条按实际两臂执行顺序排列。</span><span>数值为结算后的模拟货币，不扣模型成本。</span></div>
+</section>
+<aside class="detail" aria-labelledby="detailTitle"><div class="section-head detail-head"><h2 id="detailTitle">所选配对</h2><span id="detailState" class="small muted">未选择</span></div><div id="detailName" class="detail-title">等待配对</div><div id="detailMeta" class="detail-meta"></div><ol id="arms" class="phase-list"></ol><div id="activity" class="activity"></div>
+<div class="detail-result"><div><div class="metric-label">Base 罚金</div><div class="num" id="baseFine">未评分</div></div><div><div class="metric-label">候选罚金</div><div class="num" id="candidateFine">未评分</div></div><div><div class="metric-label">利润配对差</div><div class="num" id="delta">未评分</div></div><div><div class="metric-label">两组经营存活</div><div class="num" id="survival">未评分</div></div></div><div id="errors" class="error-list"></div></aside></div>
+<section class="log-section" aria-labelledby="logTitle"><div class="log-head"><h2 id="logTitle">事件与日志</h2><div class="log-controls"><label for="source" class="small muted">来源</label><select id="source"><option value="run">pilot 日志</option></select><button id="follow" type="button" aria-pressed="true">自动跟随：开</button><button id="copyRoot" type="button">复制目录</button></div></div><div id="logbox" class="logbox" tabindex="0" aria-label="日志内容"><pre id="log">等待日志。仅展示有界尾部。</pre></div><div class="log-meta"><span id="logMeta">不提供数据库、环境变量或任意文件读取。</span><span id="synced">尚未同步</span></div></section>
+</main><footer><span>仅本机访问 · 两秒刷新 · 无外部资源 · 无启动或重试接口</span><span>固定 harness，不运行改进器、反思或经验更新。单对不能证明泛化。</span></footer>
+</div>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const labels={prepared:'已准备',running:'运行中',complete:'已完成',completed:'整批已完成',pilot_complete:'pilot 已完成',failed:'失败',invalid:'产物异常',verification_failed:'验收异常',interrupted:'已中断',incomplete:'执行未完整',pending:'待执行'};
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=v=>typeof v==='number'&&Number.isFinite(v)?v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}):'未评分';
+const tone=s=>['failed','invalid','verification_failed'].includes(s)?'bad':['interrupted','incomplete'].includes(s)?'warn':['complete','completed','pilot_complete','running'].includes(s)?'good':'muted';
+const duration=v=>v==null?'未记录':[Math.floor(v/3600),Math.floor(v%3600/60),Math.floor(v%60)].map(x=>String(x).padStart(2,'0')).join(':');
+function age(t){if(!t)return '暂无事件';const s=Math.max(0,Math.round(Date.now()/1000-t));return s<60?`${s} 秒前`:s<3600?`${Math.floor(s/60)} 分钟前`:s<86400?`${Math.floor(s/3600)} 小时前`:`${Math.floor(s/86400)} 天前`}
+let data=null,selected=null,following=true,busy=false,timer=null,ticket=0,lastSync=null,queueHTML='';
+async function getJson(url){const r=await fetch(url,{cache:'no-store',signal:AbortSignal.timeout(7000)});if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.json()}
+function render(){
+ const c=data.counts;if(!data.pairs.some(p=>p.id===selected))selected=(data.pairs.find(p=>p.status==='running')||data.pairs[0])?.id;
+ $('root').textContent=data.root;$('jobStatus').className='status '+tone(data.status);$('jobStatus').innerHTML=`<i class="dot ${data.worker_alive?'live-beacon':''}"></i>${esc(labels[data.status]||data.status)}`;
+ $('config').innerHTML=`<span>模型 <strong class="mono">${esc(data.model)}</strong></span><span>候选 <strong>冻结 seed${esc(data.candidate_seed??'?')} / c1</strong></span><span>策略 <strong>固定，不学习</strong></span><span>初始 pilot 上限 <strong class="mono">${esc(data.pilot_limit??'未记录')} 次经营尝试</strong></span>`;
+ $('rollouts').innerHTML=`${c.rollouts} <span>/ ${c.planned_rollouts}</span>`;$('rolloutFoot').textContent=`尚未启动 ${c.not_run} 次，不自动扩批`;
+ $('pairs').innerHTML=`${c.complete_pairs} <span>/ ${c.planned_pairs}</span>`;
+ $('failures').innerHTML=`<b class="${c.failed?'bad':''}">${c.failed}</b> <span>/ ${c.attempts}</span>`;$('failureFoot').textContent=`历史失败 ${c.failed_attempts} 次，产物异常 ${c.invalid} 格`;
+ $('elapsed').textContent=duration(data.elapsed_seconds);$('phase').textContent=data.worker_alive?'受管运行锁仍持有':data.status==='pilot_complete'?'pilot 结束，剩余评测未启动':'当前无受管评测进程';
+ let notice=data.error||'';if(!notice)notice=data.stale?'受管进程仍持锁，但两分钟没有新轨迹。可能在推理或等待服务，此提示不代表网络故障。':data.status==='pilot_complete'?`pilot 已完成，当前 ${c.rollouts}/${c.planned_rollouts} 次经营、${c.complete_pairs}/${c.planned_pairs} 对。其余 ${c.not_run} 次未启动，等待继续执行授权，不是断网卡住。`:data.status==='interrupted'?'状态文件记录运行中，但进程已释放锁。先检查日志，再通过命令行恢复；本页不自动重试。':c.invalid?'存在归属或指纹异常，不计入完整执行与收益比较。':data.warning;
+ $('notice').textContent=notice;$('notice').className='notice'+(data.error||c.invalid?' error':'');
+ $('queueCount').textContent=`${c.planned_pairs} PAIRS`;
+ $('progress').innerHTML=data.pairs.flatMap(p=>((p.seed+p.repeat)%2===0?['base','agg']:['agg','base']).map(a=>`<span class="segment ${p.arms[a].status==='invalid'?'failed':esc(p.arms[a].status)}" title="${esc(p.id)} ${a}: ${esc(labels[p.arms[a].status])}"></span>`)).join('');
+ $('progress').setAttribute('aria-valuenow',Math.round(c.rollouts/c.planned_rollouts*100));renderQueue();renderDetail();
+}
+function renderQueue(){
+ const filter=$('filter').value;const items=data.pairs.filter(p=>filter==='all'||(filter==='problem'?['failed','invalid','incomplete'].includes(p.status):p.status===filter));
+ const state=a=>`<span class="state-label ${tone(a.status)}"><i class="dot"></i>${esc(labels[a.status])}</span>`;
+ const html=items.map(p=>`<tr class="${p.id===selected?'selected':''}"><td><button type="button" class="task-button" data-pair="${esc(p.id)}" aria-pressed="${p.id===selected}"><div class="task-name">seed ${p.seed} / r${p.repeat}</div><div class="task-sub">${esc(p.hours)}h · ${esc(labels[p.status])}</div></button></td><td>${state(p.arms.base)}</td><td>${state(p.arms.agg)}</td><td class="number">${fmt(p.arms.base.net_profit)}</td><td class="number">${fmt(p.arms.agg.net_profit)}</td><td class="number ${p.delta>0?'good':p.delta<0?'bad':'muted'}">${p.delta>0?'+':''}${fmt(p.delta)}</td></tr>`).join('')||'<tr><td class="empty" colspan="6">没有符合条件的配对。</td></tr>';
+ if(html!==queueHTML){const focus=document.activeElement?.dataset?.pair;$('queue').innerHTML=html;queueHTML=html;if(focus)[...$('queue').querySelectorAll('button')].find(b=>b.dataset.pair===focus)?.focus({preventScroll:true})}
+}
+function renderDetail(){
+ const p=data.pairs.find(x=>x.id===selected);if(!p)return;const b=p.arms.base,a=p.arms.agg;
+ $('detailName').textContent=p.id;$('detailMeta').textContent=`${p.hours}h · ${(p.seed+p.repeat)%2===0?'Base → 候选':'候选 → Base'} · 独立全新经营状态`;
+ $('detailState').textContent=labels[p.status];$('detailState').className='small '+tone(p.status);
+ const order=(p.seed+p.repeat)%2===0?[['Base',b],['候选',a]]:[['候选',a],['Base',b]];
+ $('arms').innerHTML=order.map(([name,arm],i)=>`<li><span class="phase-name"><span class="phase-no">0${i+1}</span>${name}</span><span class="phase-state ${tone(arm.status)}">${esc(labels[arm.status])}</span></li>`).join('');
+ $('baseFine').textContent=fmt(b.fine);$('candidateFine').textContent=fmt(a.fine);$('delta').textContent=(p.delta>0?'+':'')+fmt(p.delta);$('delta').className='num '+(p.delta>0?'good':p.delta<0?'bad':'muted');
+ const alive=v=>v==null?'未评分':v?'存活':'死亡';$('survival').textContent=`${alive(b.alive)} / ${alive(a.alive)}`;
+ $('activity').textContent=`Base：${b.last_event||'暂无事件'}，${age(b.last_activity)}。候选：${a.last_event||'暂无事件'}，${age(a.last_activity)}。`;
+ $('errors').textContent=[b.error&&'Base：'+b.error,a.error&&'候选：'+a.error].filter(Boolean).join('\n');
+}
+async function renderLog(){
+ const current=++ticket;const q=new URLSearchParams({source:$('source').value});if(selected)q.set('pair',selected);const result=await getJson('/api/log?'+q);if(current!==ticket)return;
+ const select=$('source'),value=select.value;const options=result.sources.map(s=>`<option value="${esc(s.id)}">${esc(s.label)}</option>`).join('');
+ if(select.innerHTML!==options){select.innerHTML=options;if([...select.options].some(o=>o.value===value))select.value=value}
+ $('log').textContent=result.text||'该来源尚无日志。推理期间可能暂不输出事件。';$('logMeta').textContent=(result.truncated?'有界尾部，较早内容已省略。':'')+`日志更新：${age(result.updated_at)}`;if(following)$('logbox').scrollTop=$('logbox').scrollHeight;
+}
+async function tick(){if(busy)return;clearTimeout(timer);busy=true;try{data=await getJson('/api/status');lastSync=new Date();document.body.dataset.offline='false';$('connection').className='good';$('connection').innerHTML='<i class="dot"></i> 看板已连接';render();try{await renderLog()}catch(e){$('logMeta').textContent='日志暂不可用，当前状态已同步；稍后自动重试。'}$('synced').textContent='最后同步 '+lastSync.toLocaleTimeString('zh-CN',{hour12:false})}catch(e){document.body.dataset.offline='true';$('connection').className='bad';$('connection').textContent='看板连接中断';$('notice').className='notice error';$('notice').textContent=`无法连接本机只读服务。${lastSync?'以下是 '+lastSync.toLocaleTimeString('zh-CN',{hour12:false})+' 的缓存，不代表任务仍在运行。':'请检查看板服务。'}页面不会重启评测。`;$('jobStatus').textContent='缓存状态'}finally{busy=false;timer=setTimeout(tick,2000)}}
+$('queue').addEventListener('click',e=>{const b=e.target.closest('button[data-pair]');if(!b)return;selected=b.dataset.pair;renderQueue();renderDetail();renderLog().catch(()=>$('logMeta').textContent='日志暂不可用，稍后重试。')});
+$('filter').addEventListener('change',()=>{if(data)renderQueue()});$('refresh').addEventListener('click',tick);
+$('source').addEventListener('change',()=>renderLog().catch(()=>$('logMeta').textContent='日志暂不可用，稍后重试。'));
+$('follow').addEventListener('click',()=>{following=!following;$('follow').setAttribute('aria-pressed',following);$('follow').textContent='自动跟随：'+(following?'开':'关');if(following)$('logbox').scrollTop=$('logbox').scrollHeight});
+$('copyRoot').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(data?.root||'');$('copyRoot').textContent='已复制';setTimeout(()=>$('copyRoot').textContent='复制目录',1600)}catch(e){$('logMeta').textContent='复制未获授权，请选择页首目录文本。'}});
+tick();
+</script>
+</body>
+</html>
